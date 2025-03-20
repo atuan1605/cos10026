@@ -58,68 +58,63 @@
 
   </div>
   <!-- Section 2: Key features -->
-  <div class="lower-content">
+  <?php
+$reasons = [
+  [
+      'image' => './styles/images/shakehand.jpg',
+      'title' => 'Extensive network',
+      'picturename' => 'partnered',
+      'description' => 'Partnered with over 2000 tech companies worldwide'
+  ],
+  [
+      'image' => './styles/images/specialized.jpg',
+      'title' => 'Professional Team',
+      'picturename' => 'specialized',
+      'description' => 'Specialized in IT recruitment (Frontend, Backend, UI/UX, QA, etc.)'
+  ],
+  [
+      'image' => './styles/images/support.jpg',
+      'title' => 'Conscientious',
+      'picturename' => 'support',
+      'description' => 'Supports on-site, remote, or hybrid work'
+  ],
+  [
+      'image' => './styles/images/coaching.jpg',
+      'title' => 'Methodical Training',
+      'picturename' => 'coaching',
+      'description' => 'Free career coaching and skill development services'
+  ]
+];
+$reasonCount = count($reasons);
+$i = 0;
+?>
+
+<div class="lower-content">
     <section id="index-reason">
-      <h2 class="narow-head">Why Choose LuckyJob?</h2>
-      <div id="reason-box">
-
-        <div class="Img-cover">
-          <section id="partnered-picture" style="background-image: url('./styles/images/shakehand.jpg');">
-            <section class="index-Img"></section>
-          </section>
-          <section class="under-title">
-            <p>Extensive network</p>
-          </section>
-          <section class="reason-hr">
-            <hr>
-          </section>
-          <p>Partnered with over 2000 tech companies worldwide</p>
+        <h2 class="narow-head">Why Choose LuckyJob?</h2>
+        <div id="reason-box">
+            <?php while ($i < $reasonCount) : ?>
+                <?php
+                    $image = $reasons[$i]['image'];
+                ?>
+                <div class="Img-cover">
+                    <section id="<?= $reasons[$i]['picturename'] ?>-picture" style="background-image: url('<?= $image ?>');">
+                        <section class="index-Img"></section>
+                    </section>
+                    <section class="under-title">
+                        <p><?= $reasons[$i]['title'] ?></p>
+                    </section>
+                    <section class="reason-hr">
+                        <hr>
+                    </section>
+                    <p><?= $reasons[$i]['description'] ?></p>
+                </div>
+                <?php $i++; ?>
+            <?php endwhile; ?>
         </div>
-
-        <div class="Img-cover">
-          <section id="specialized-picture" style="background-image: url('./styles/images/specialized.jpg');">
-            <section class="index-Img"></section>
-          </section>
-          <section class="under-title">
-            <p>Professional Team</p>
-          </section>
-          <section class="reason-hr">
-            <hr>
-          </section>
-          <p>Specialized in IT recruitment (Frontend, Backend, UI/UX, QA, etc.)</p>
-        </div>
-
-
-        <div class="Img-cover">
-          <section id="support-picture" style="background-image: url('./styles/images/support.jpg');">
-            <section class="index-Img"></section>
-          </section>
-          <section class="under-title">
-            <p>Conscientious</p>
-          </section>
-          <section class="reason-hr">
-            <hr>
-          </section>
-          <p>Supports on-site, remote, or hybrid work</p>
-        </div>
-
-        <div class="Img-cover">
-          <section id="coaching-picture" style="background-image: url('./styles/images/coaching.jpg');">
-            <section class="index-Img"></section>
-          </section>
-          <section class="under-title">
-            <p>Methodical Training</p>
-          </section>
-          <section class="reason-hr">
-            <hr>
-          </section>
-          <p>Free career coaching and skill development services</p>
-        </div>
-      </div>
     </section>
-  </div>
-  </section>
-  </div>
+</div>
+
   <!--Section 3-->
   <div class="main-content">
 
