@@ -59,227 +59,158 @@
   </div>
   <!-- Section 2: Key features -->
   <?php
-$reasons = [
-  [
+  $reasons = [
+    [
       'image' => './styles/images/shakehand.jpg',
       'title' => 'Extensive network',
       'picturename' => 'partnered',
       'description' => 'Partnered with over 2000 tech companies worldwide'
-  ],
-  [
+    ],
+    [
       'image' => './styles/images/specialized.jpg',
       'title' => 'Professional Team',
       'picturename' => 'specialized',
       'description' => 'Specialized in IT recruitment (Frontend, Backend, UI/UX, QA, etc.)'
-  ],
-  [
+    ],
+    [
       'image' => './styles/images/support.jpg',
       'title' => 'Conscientious',
       'picturename' => 'support',
       'description' => 'Supports on-site, remote, or hybrid work'
-  ],
-  [
+    ],
+    [
       'image' => './styles/images/coaching.jpg',
       'title' => 'Methodical Training',
       'picturename' => 'coaching',
       'description' => 'Free career coaching and skill development services'
-  ]
-];
-$reasonCount = count($reasons);
-$i = 0;
-?>
+    ]
+  ];
+  $reasonCount = count($reasons);
+  $i = 0;
+  ?>
 
-<div class="lower-content">
+  <div class="lower-content">
     <section id="index-reason">
-        <h2 class="narow-head">Why Choose LuckyJob?</h2>
-        <div id="reason-box">
-            <?php while ($i < $reasonCount) : ?>
-                <?php
-                    $image = $reasons[$i]['image'];
-                ?>
-                <div class="Img-cover">
-                    <section id="<?= $reasons[$i]['picturename'] ?>-picture" style="background-image: url('<?= $image ?>');">
-                        <section class="index-Img"></section>
-                    </section>
-                    <section class="under-title">
-                        <p><?= $reasons[$i]['title'] ?></p>
-                    </section>
-                    <section class="reason-hr">
-                        <hr>
-                    </section>
-                    <p><?= $reasons[$i]['description'] ?></p>
-                </div>
-                <?php $i++; ?>
-            <?php endwhile; ?>
-        </div>
+      <h2 class="narow-head">Why Choose LuckyJob?</h2>
+      <div id="reason-box">
+        <?php while ($i < $reasonCount) : ?>
+          <?php
+          $image = $reasons[$i]['image'];
+          ?>
+          <div class="Img-cover">
+            <section id="<?= $reasons[$i]['picturename'] ?>-picture" style="background-image: url('<?= $image ?>');">
+              <section class="index-Img"></section>
+            </section>
+            <section class="under-title">
+              <p><?= $reasons[$i]['title'] ?></p>
+            </section>
+            <section class="reason-hr">
+              <hr>
+            </section>
+            <p><?= $reasons[$i]['description'] ?></p>
+          </div>
+          <?php $i++; ?>
+        <?php endwhile; ?>
+      </div>
     </section>
-</div>
+  </div>
 
   <!--Section 3-->
+
+  <?php
+  $jobs = [
+    [
+      'jobNumber' => 'fourth',
+      'date' => '20 May, 2023',
+      'company' => 'Amazon',
+      'title' => 'Senior UI/UX Designer',
+      'tags' => ['Part time', 'Senior level', 'Distant', 'Project work'],
+      'salary' => '$250/hr',
+      'location' => 'San Francisco, CA'
+    ],
+    [
+      'jobNumber' => 'second',
+      'date' => '4 Feb, 2023',
+      'company' => 'Google',
+      'title' => 'Junior UI/UX Designer',
+      'tags' => ['Full time', 'Junior level', 'Distant', 'Project work', 'Flexible Schedule'],
+      'salary' => '$150/hr',
+      'location' => 'California, CA'
+    ],
+    [
+      'jobNumber' => 'first',
+      'date' => '29 Jan, 2023',
+      'company' => 'Dribbble',
+      'title' => 'Senior Motion Designer',
+      'tags' => ['Part time', 'Senior level', 'Full Day', 'Shift work'],
+      'salary' => '$260/hr',
+      'location' => 'New York, NY'
+    ],
+    [
+      'jobNumber' => 'third',
+      'date' => '11 Apr, 2023',
+      'company' => 'Twitter',
+      'title' => 'UX Designer',
+      'tags' => ['Full time', 'Middle level', 'Distant', 'Project work'],
+      'salary' => '$120/hr',
+      'location' => 'California, CA'
+    ],
+    [
+      'jobNumber' => 'last',
+      'date' => '2 Apr, 2023',
+      'company' => 'Airbnb',
+      'title' => 'Graphic Designer',
+      'tags' => ['Part time', 'Senior level'],
+      'salary' => '$300/hr',
+      'location' => 'New York, NY'
+    ],
+    [
+      'jobNumber' => 'fifth',
+      'date' => '18 Jan, 2023',
+      'company' => 'Apple',
+      'title' => 'Graphic Designer',
+      'tags' => ['Part time', 'Distant'],
+      'salary' => '$140/hr',
+      'location' => 'San Francisco, CA'
+    ]
+  ];
+  ?>
+
   <div class="main-content">
-
-    <!-- SIDEBAR FILTERS -->
-
-
-    <!-- CONTENT AREA -->
     <section class="content-area">
-      <!-- Filter bar -->
-
-      <!-- Recommended jobs header -->
-      <div class="recommended-header">
-        <h2>Recommended jobs</h2>
-        <div class="job-count">6</div>
-      </div>
-
-      <!-- Job Cards -->
+      <h2>Recommended jobs</h2>
       <div class="job-cards">
-        <!-- Card 1 -->
-        <div class="job-card">
-          <div id="fourth-job-card">
-            <div class="job-card-header">
-              <span class="job-card-date">20 May, 2023</span>
+        <?php
+        $i = 0;
+        while ($i < count($jobs)) : ?>
+          <div class="job-card">
+            <div id="<?= $jobs[$i]['jobNumber'] ?>-job-card">
+              <div class="job-card-header">
+                <span class="job-card-date"> <?= $jobs[$i]['date'] ?> </span>
+              </div>
+              <p class="company-name"> <?= $jobs[$i]['company'] ?> </p>
+              <h3 class="job-card-title"> <?= $jobs[$i]['title'] ?> </h3>
+              <div class="job-card-tags">
+                <?php
+                $j = 0;
+                while ($j < count($jobs[$i]['tags'])) : ?>
+                  <span> <?= $jobs[$i]['tags'][$j] ?> </span>
+                <?php
+                  $j++;
+                endwhile; ?>
+              </div>
             </div>
-            <p class="company-name">Amazon</p>
-            <h3 class="job-card-title">Senior UI/UX Designer</h3>
-            <div class="job-card-tags">
-              <span>Part time</span>
-              <span>Senior level</span>
-              <span>Distant</span>
-              <span>Project work</span>
-            </div>
-          </div>
-          <div class="job-card-footer">
-            <div>
-              <div class="job-salary">$250/hr</div>
-              <div class="job-location">San Francisco, CA</div>
-            </div>
-            <a href="/jobs.html" class="job-detail-button">Details</a>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="job-card">
-          <div id="second-job-card">
-            <div class="job-card-header">
-              <span class="job-card-date">4 Feb, 2023</span>
-            </div>
-            <p class="company-name">Google</p>
-            <div class="job-card-title">
-              <h3>Junior UI/UX Designer</h3>
-              <img class="figma-image" src="./styles/images/figma.png" alt="figma_image">
-            </div>
-            <div class="job-card-tags">
-              <span>Full time</span>
-              <span>Junior level</span>
-              <span>Distant</span>
-              <span>Project work</span>
-              <span>Flexible Schedule</span>
+            <div class="job-card-footer">
+              <div>
+                <div class="job-salary"> <?= $jobs[$i]['salary'] ?> </div>
+                <div class="job-location"> <?= $jobs[$i]['location'] ?> </div>
+              </div>
+              <a href="/jobs.html" class="job-detail-button">Details</a>
             </div>
           </div>
-          <div class="job-card-footer">
-            <div>
-              <div class="job-salary">$150/hr</div>
-              <div class="job-location">California, CA</div>
-            </div>
-            <a href="/jobs.html" class="job-detail-button">Details</a>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="job-card">
-          <div id="first-job-card">
-            <div class="job-card-header">
-              <span class="job-card-date">29 Jan, 2023</span>
-            </div>
-            <p class="company-name">Dribbble</p>
-            <div class="job-card-title">
-              <h3>Senior Motion Designer</h3>
-              <img class="figma-image" src="./styles/images/dribble.png" alt="dribble_image">
-            </div>
-            <div class="job-card-tags">
-              <span>Part time</span>
-              <span>Senior level</span>
-              <span>Full Day</span>
-              <span>Shift work</span>
-            </div>
-          </div>
-          <div class="job-card-footer">
-            <div>
-              <div class="job-salary">$260/hr</div>
-              <div class="job-location">New York, NY</div>
-            </div>
-            <a href="/jobs.html" class="job-detail-button">Details</a>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="job-card">
-          <div id="third-job-card">
-            <div class="job-card-header">
-              <span class="job-card-date">11 Apr, 2023</span>
-            </div>
-            <p class="company-name">Twitter</p>
-            <h3 class="job-card-title">UX Designer</h3>
-            <div class="job-card-tags">
-              <span>Full time</span>
-              <span>Middle level</span>
-              <span>Distant</span>
-              <span>Project work</span>
-            </div>
-          </div>
-          <div class="job-card-footer">
-            <div>
-              <div class="job-salary">$120/hr</div>
-              <div class="job-location">California, CA</div>
-            </div>
-            <a href="/jobs.html" class="job-detail-button">Details</a>
-          </div>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="job-card">
-          <div id="last-job-card">
-            <div class="job-card-header">
-              <span class="job-card-date">2 Apr, 2023</span>
-            </div>
-            <p class="company-name">Airbnb</p>
-            <h3 class="job-card-title">Graphic Designer</h3>
-            <div class="job-card-tags">
-              <span>Part time</span>
-              <span>Senior level</span>
-            </div>
-          </div>
-          <div class="job-card-footer">
-            <div>
-              <div class="job-salary">$300/hr</div>
-              <div class="job-location">New York, NY</div>
-            </div>
-            <a href="/jobs.html" class="job-detail-button">Details</a>
-          </div>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="job-card">
-          <div id="fifth-job-card">
-            <div class="job-card-header">
-              <span class="job-card-date">18 Jan, 2023</span>
-            </div>
-            <p class="company-name">Apple</p>
-            <h3 class="job-card-title">Graphic Designer</h3>
-            <div class="job-card-tags">
-              <span>Part time</span>
-              <span>Distant</span>
-            </div>
-          </div>
-          <div class="job-card-footer">
-            <div>
-              <div class="job-salary">$140/hr</div>
-              <div class="job-location">San Francisco, CA</div>
-            </div>
-            <a href="/jobs.html" class="job-detail-button">Details</a>
-          </div>
-        </div>
-
+        <?php
+          $i++;
+        endwhile; ?>
       </div>
     </section>
   </div>
