@@ -63,25 +63,25 @@
     [
       'image' => './styles/images/shakehand.jpg',
       'title' => 'Extensive network',
-      'picturename' => 'partnered',
+      'pictureName' => 'partnered',
       'description' => 'Partnered with over 2000 tech companies worldwide'
     ],
     [
       'image' => './styles/images/specialized.jpg',
       'title' => 'Professional Team',
-      'picturename' => 'specialized',
+      'pictureName' => 'specialized',
       'description' => 'Specialized in IT recruitment (Frontend, Backend, UI/UX, QA, etc.)'
     ],
     [
       'image' => './styles/images/support.jpg',
       'title' => 'Conscientious',
-      'picturename' => 'support',
+      'pictureName' => 'support',
       'description' => 'Supports on-site, remote, or hybrid work'
     ],
     [
       'image' => './styles/images/coaching.jpg',
       'title' => 'Methodical Training',
-      'picturename' => 'coaching',
+      'pictureName' => 'coaching',
       'description' => 'Free career coaching and skill development services'
     ]
   ];
@@ -98,7 +98,7 @@
           $image = $reasons[$i]['image'];
           ?>
           <div class="Img-cover">
-            <section id="<?= $reasons[$i]['picturename'] ?>-picture" style="background-image: url('<?= $image ?>');">
+            <section id="<?= $reasons[$i]['pictureName'] ?>-picture" style="background-image: url('<?= $image ?>');">
               <section class="index-Img"></section>
             </section>
             <section class="under-title">
@@ -133,6 +133,7 @@
       'date' => '4 Feb, 2023',
       'company' => 'Google',
       'title' => 'Junior UI/UX Designer',
+      'images' => './styles/images/figma.png',
       'tags' => ['Full time', 'Junior level', 'Distant', 'Project work', 'Flexible Schedule'],
       'salary' => '$150/hr',
       'location' => 'California, CA'
@@ -142,6 +143,7 @@
       'date' => '29 Jan, 2023',
       'company' => 'Dribbble',
       'title' => 'Senior Motion Designer',
+      'images' => './styles/images/dribble.png',
       'tags' => ['Part time', 'Senior level', 'Full Day', 'Shift work'],
       'salary' => '$260/hr',
       'location' => 'New York, NY'
@@ -194,7 +196,7 @@
                 <?php
                 $j = 0;
                 while ($j < count($jobs[$i]['tags'])) : ?>
-                  <span> <?= $jobs[$i]['tags'][$j] ?> </span>
+                  <section><?= $jobs[$i]['tags'][$j] ?></section> 
                 <?php
                   $j++;
                 endwhile; ?>
