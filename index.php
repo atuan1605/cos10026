@@ -10,31 +10,7 @@
 <body class="homepage">
 
   <!-- HEADER & NAV -->
-  <header>
-    <div class="navbar">
-      <div class="navbar-left">
-        <div class="logo">LuckyJob</div>
-        <input type="checkbox" id="menu-toggle" />
-        <nav class="navbar-menu">
-          <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="jobs.html">Jobs</a></li>
-            <li><a href="apply.html">Apply</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="enhancements.html">Enhancements</a></li>
-            <!-- An email link as required -->
-            <li><a href="105313596@student.swin.edu.au">Email</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="navbar-right">
-        <div class="location">Hanoi, VN</div>
-        <img src="./styles/images/avatar.png" class="user-avatar" alt="avatar">
-        <label for="menu-toggle" class="menu-btn">&#9776; Menu</label>
-      </div>
-    </div>
-  </header>
-
+<?php include 'header.php';?>
   <!-- MAIN CONTENT -->
   <div class="main-intro" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.658), rgba(0, 0, 0, 0.658)), url('./styles/images/indexmeeting.jpg'); background-repeat: no-repeat; background-size: cover;">
 
@@ -59,32 +35,7 @@
   </div>
   <!-- Section 2: Key features -->
   <?php
-  $reasons = [
-    [
-      'image' => './styles/images/shakehand.jpg',
-      'title' => 'Extensive network',
-      'pictureName' => 'partnered',
-      'description' => 'Partnered with over 2000 tech companies worldwide'
-    ],
-    [
-      'image' => './styles/images/specialized.jpg',
-      'title' => 'Professional Team',
-      'pictureName' => 'specialized',
-      'description' => 'Specialized in IT recruitment (Frontend, Backend, UI/UX, QA, etc.)'
-    ],
-    [
-      'image' => './styles/images/support.jpg',
-      'title' => 'Conscientious',
-      'pictureName' => 'support',
-      'description' => 'Supports on-site, remote, or hybrid work'
-    ],
-    [
-      'image' => './styles/images/coaching.jpg',
-      'title' => 'Methodical Training',
-      'pictureName' => 'coaching',
-      'description' => 'Free career coaching and skill development services'
-    ]
-  ];
+  include 'trungData.php';
   $reasonCount = count($reasons);
   $i = 0;
   ?>
@@ -118,64 +69,7 @@
   <!--Section 3-->
 
   <?php
-  $jobs = [
-    [
-      'jobNumber' => 'fourth',
-      'date' => '20 May, 2023',
-      'company' => 'Amazon',
-      'title' => 'Senior UI/UX Designer',
-      'tags' => ['Part time', 'Senior level', 'Distant', 'Project work'],
-      'salary' => '$250/hr',
-      'location' => 'San Francisco, CA'
-    ],
-    [
-      'jobNumber' => 'second',
-      'date' => '4 Feb, 2023',
-      'company' => 'Google',
-      'title' => 'Junior UI/UX Designer',
-      'images' => './styles/images/figma.png',
-      'tags' => ['Full time', 'Junior level', 'Distant', 'Project work', 'Flexible Schedule'],
-      'salary' => '$150/hr',
-      'location' => 'California, CA'
-    ],
-    [
-      'jobNumber' => 'first',
-      'date' => '29 Jan, 2023',
-      'company' => 'Dribbble',
-      'title' => 'Senior Motion Designer',
-      'images' => './styles/images/dribble.png',
-      'tags' => ['Part time', 'Senior level', 'Full Day', 'Shift work'],
-      'salary' => '$260/hr',
-      'location' => 'New York, NY'
-    ],
-    [
-      'jobNumber' => 'third',
-      'date' => '11 Apr, 2023',
-      'company' => 'Twitter',
-      'title' => 'UX Designer',
-      'tags' => ['Full time', 'Middle level', 'Distant', 'Project work'],
-      'salary' => '$120/hr',
-      'location' => 'California, CA'
-    ],
-    [
-      'jobNumber' => 'last',
-      'date' => '2 Apr, 2023',
-      'company' => 'Airbnb',
-      'title' => 'Graphic Designer',
-      'tags' => ['Part time', 'Senior level'],
-      'salary' => '$300/hr',
-      'location' => 'New York, NY'
-    ],
-    [
-      'jobNumber' => 'fifth',
-      'date' => '18 Jan, 2023',
-      'company' => 'Apple',
-      'title' => 'Graphic Designer',
-      'tags' => ['Part time', 'Distant'],
-      'salary' => '$140/hr',
-      'location' => 'San Francisco, CA'
-    ]
-  ];
+  include 'trungData.php';
   ?>
 
   <div class="main-content">
@@ -204,7 +98,7 @@
             </div>
             <div class="job-card-footer">
               <div>
-                <div class="job-salary"> <?= $jobs[$i]['salary'] ?> </div>
+                <div class="job-salary"> $<?= $jobs[$i]['salary'] ?>/hr </div>
                 <div class="job-location"> <?= $jobs[$i]['location'] ?> </div>
               </div>
               <a href="/jobs.html" class="job-detail-button">Details</a>

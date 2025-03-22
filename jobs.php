@@ -10,30 +10,7 @@
 <body>
 
   <!-- HEADER & NAV -->
-  <header>
-    <div class="navbar">
-      <div class="navbar-left">
-        <div class="logo">LuckyJob</div>
-        <input type="checkbox" id="menu-toggle" />
-        <nav class="navbar-menu">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="jobs.html" class="active">Jobs</a></li>
-            <li><a href="apply.html">Apply</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="enhancements.html">Enhancements</a></li>
-            <li><a href="mailto:yourID@swin.edu.au">Email</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="navbar-right">
-        <div class="location">Hanoi, VN</div>
-        <img src="./styles/images/avatar.png" class="user-avatar" alt="avatar">
-        <label for="menu-toggle" class="menu-btn">&#9776; Menu</label>
-      </div>
-    </div>
-  </header>
-
+  <?php include 'header.php';?>
   <!-- MAIN CONTENT -->
   <div class="main-content">
 
