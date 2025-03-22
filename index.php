@@ -10,7 +10,7 @@
 <body class="homepage">
 
   <!-- HEADER & NAV -->
-<?php include 'header.php';?>
+  <?php include 'header.php'; ?>
   <!-- MAIN CONTENT -->
   <div class="main-intro" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.658), rgba(0, 0, 0, 0.658)), url('./styles/images/indexmeeting.jpg'); background-repeat: no-repeat; background-size: cover;">
 
@@ -39,7 +39,6 @@
   $reasonCount = count($reasons);
   $i = 0;
   ?>
-
   <div class="lower-content">
     <section id="index-reason">
       <h2 class="narow-head">Why Choose LuckyJob?</h2>
@@ -69,7 +68,7 @@
   <!--Section 3-->
 
   <?php
-  include 'trungData.php';
+  include_once 'trungData.php';
   ?>
 
   <div class="main-content">
@@ -78,35 +77,40 @@
       <div class="job-cards">
         <?php
         $i = 0;
-        while ($i < count($jobs)) : ?>
+        while ($i < count($jobs)):
+          $job = $jobs[$i];
+        ?>
           <div class="job-card">
-            <div id="<?= $jobs[$i]['jobNumber'] ?>-job-card">
+            <div id="<?= $job['jobNumber'] ?>-job-card">
               <div class="job-card-header">
-                <span class="job-card-date"> <?= $jobs[$i]['date'] ?> </span>
+                <span class="job-card-date"> <?= $job['date'] ?> </span>
               </div>
-              <p class="company-name"> <?= $jobs[$i]['company'] ?> </p>
-              <h3 class="job-card-title"> <?= $jobs[$i]['title'] ?> </h3>
+              <p class="company-name"> <?= $job['company']->value ?> </p>
+              <h3 class="job-card-title"> <?= $job['title']->value ?> </h3>
               <div class="job-card-tags">
                 <?php
                 $j = 0;
-                while ($j < count($jobs[$i]['tags'])) : ?>
-                  <section><?= $jobs[$i]['tags'][$j] ?></section> 
+                while ($j < count($job['tags'])):
+                ?>
+                  <section><?= $job['tags'][$j]->value ?></section>
                 <?php
                   $j++;
-                endwhile; ?>
+                endwhile;
+                ?>
               </div>
             </div>
             <div class="job-card-footer">
               <div>
-                <div class="job-salary"> $<?= $jobs[$i]['salary'] ?>/hr </div>
-                <div class="job-location"> <?= $jobs[$i]['location'] ?> </div>
+                <div class="job-salary"> $<?= $job['salary'] ?>/hr </div>
+                <div class="job-location"> <?= $job['location']->value ?> </div>
               </div>
               <a href="/jobs.html" class="job-detail-button">Details</a>
             </div>
           </div>
         <?php
           $i++;
-        endwhile; ?>
+        endwhile;
+        ?>
       </div>
     </section>
   </div>
