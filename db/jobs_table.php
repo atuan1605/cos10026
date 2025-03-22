@@ -17,27 +17,27 @@ if ($tableCheckResult && $tableCheckResult->num_rows > 0) {
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP NULL DEFAULT NULL,
     updated_at TIMESTAMP NULL DEFAULT NULL,
-    company_name VARCHAR(255) DEFAULT NULL,
-    position VARCHAR(255) DEFAULT NULL,
-    salary_range VARCHAR(100) DEFAULT NULL,
+    company_name VARCHAR(100) DEFAULT NULL,
+    position VARCHAR(100) DEFAULT NULL,
+    salary_range TEXT,
     address VARCHAR(255) DEFAULT NULL,
-    tags TEXT DEFAULT NULL,
-    short_description TEXT DEFAULT NULL,
-    key_responsibilities TEXT DEFAULT NULL,
+    tags TEXT,
+    short_description TEXT,
+    key_responsibilities TEXT,
     job_reference_number VARCHAR(100) UNIQUE DEFAULT NULL,
-    title VARCHAR(255) DEFAULT NULL,
-    report_to VARCHAR(255) DEFAULT NULL,
+    title VARCHAR(100) DEFAULT NULL,
+    report_to VARCHAR(100) DEFAULT NULL,
     available_position INT DEFAULT NULL,
     total INT DEFAULT NULL,
     type ENUM('Remote', 'OnSite') DEFAULT 'OnSite',
     experience ENUM('Expert', 'Intern', 'Fresher', 'Junior') DEFAULT 'Junior',
-    essential TEXT DEFAULT NULL,
-    preferable TEXT DEFAULT NULL,
-    logo_image VARCHAR(255) DEFAULT NULL
+    essential TEXT,
+    preferable TEXT,
+    logo_image TEXT
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
     if ($conn->query($createTableSQL) === TRUE) {
-        echo "Table 'users' created successfully.<br>";
+        echo "Table 'jobs' created successfully.<br>";
     } else {
         die("Error creating table: " . $conn->error);
     }
