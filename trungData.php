@@ -2,35 +2,36 @@
 //reasons for reason-box
 $reasons = [
     [
-      'image' => './styles/images/shakehand.jpg',
-      'title' => 'Extensive network',
-      'pictureName' => 'partnered',
-      'description' => 'Partnered with over 2000 tech companies worldwide'
+        'image' => './styles/images/shakehand.jpg',
+        'title' => 'Extensive network',
+        'pictureName' => 'partnered',
+        'description' => 'Partnered with over 2000 tech companies worldwide'
     ],
     [
-      'image' => './styles/images/specialized.jpg',
-      'title' => 'Professional Team',
-      'pictureName' => 'specialized',
-      'description' => 'Specialized in IT recruitment (Frontend, Backend, UI/UX, QA, etc.)'
+        'image' => './styles/images/specialized.jpg',
+        'title' => 'Professional Team',
+        'pictureName' => 'specialized',
+        'description' => 'Specialized in IT recruitment (Frontend, Backend, UI/UX, QA, etc.)'
     ],
     [
-      'image' => './styles/images/support.jpg',
-      'title' => 'Conscientious',
-      'pictureName' => 'support',
-      'description' => 'Supports on-site, remote, or hybrid work'
+        'image' => './styles/images/support.jpg',
+        'title' => 'Conscientious',
+        'pictureName' => 'support',
+        'description' => 'Supports on-site, remote, or hybrid work'
     ],
     [
-      'image' => './styles/images/coaching.jpg',
-      'title' => 'Methodical Training',
-      'pictureName' => 'coaching',
-      'description' => 'Free career coaching and skill development services'
+        'image' => './styles/images/coaching.jpg',
+        'title' => 'Methodical Training',
+        'pictureName' => 'coaching',
+        'description' => 'Free career coaching and skill development services'
     ]
-  ];
+];
 
 
 
 //Jobs + ENUM
-enum Company: string {
+enum Company: string
+{
     case AMAZON = 'Amazon';
     case GOOGLE = 'Google';
     case DRIBBBLE = 'Dribbble';
@@ -39,7 +40,8 @@ enum Company: string {
     case APPLE = 'Apple';
 }
 
-enum JobTitle: string {
+enum JobTitle: string
+{
     case SENIOR_UI_UX = 'Senior UI/UX Designer';
     case JUNIOR_UI_UX = 'Junior UI/UX Designer';
     case SENIOR_MOTION = 'Senior Motion Designer';
@@ -47,7 +49,8 @@ enum JobTitle: string {
     case GRAPHIC_DESIGNER = 'Graphic Designer';
 }
 
-enum JobTag: string {
+enum JobTag: string
+{
     case PART_TIME = 'Part time';
     case FULL_TIME = 'Full time';
     case SENIOR_LEVEL = 'Senior level';
@@ -60,10 +63,19 @@ enum JobTag: string {
     case FLEXIBLE_SCHEDULE = 'Flexible Schedule';
 }
 
-enum Location: string {
+enum Location: string
+{
     case SAN_FRANCISCO = 'San Francisco, CA';
     case CALIFORNIA = 'California, CA';
     case NEW_YORK = 'New York, NY';
+}
+
+enum Per: string
+{
+    case HOUR = 'hr';
+    case DAY = 'Day';
+    case WEEK = 'Week';
+    case Month = 'Month';
 }
 
 $jobs = [
@@ -74,6 +86,8 @@ $jobs = [
         'title' => JobTitle::SENIOR_UI_UX,
         'tags' => [JobTag::PART_TIME, JobTag::SENIOR_LEVEL, JobTag::DISTANT, JobTag::PROJECT_WORK],
         'salary' => '250',
+        "per" => PER::HOUR,
+        "job_reference_number" => "9C9VA",
         'location' => Location::SAN_FRANCISCO
     ],
     [
@@ -84,6 +98,8 @@ $jobs = [
         'images' => './styles/images/figma.png',
         'tags' => [JobTag::FULL_TIME, JobTag::JUNIOR_LEVEL, JobTag::DISTANT, JobTag::PROJECT_WORK, JobTag::FLEXIBLE_SCHEDULE],
         'salary' => '150',
+        "per" => PER::HOUR,
+        "job_reference_number" => "UV991",
         'location' => Location::CALIFORNIA
     ],
     [
@@ -94,6 +110,8 @@ $jobs = [
         'images' => './styles/images/dribble.png',
         'tags' => [JobTag::PART_TIME, JobTag::SENIOR_LEVEL, JobTag::FULL_DAY, JobTag::SHIFT_WORK],
         'salary' => '260',
+        "per" => PER::HOUR,
+        "job_reference_number" => "2Q7X9",
         'location' => Location::NEW_YORK
     ],
     [
@@ -103,6 +121,8 @@ $jobs = [
         'title' => JobTitle::UX_DESIGNER,
         'tags' => [JobTag::FULL_TIME, JobTag::MIDDLE_LEVEL, JobTag::DISTANT, JobTag::PROJECT_WORK],
         'salary' => '120',
+        "per" => PER::HOUR,
+        "job_reference_number" => "BUY4Z",
         'location' => Location::CALIFORNIA
     ],
     [
@@ -112,6 +132,8 @@ $jobs = [
         'title' => JobTitle::GRAPHIC_DESIGNER,
         'tags' => [JobTag::PART_TIME, JobTag::SENIOR_LEVEL],
         'salary' => '300',
+        "per" => PER::HOUR,
+        "job_reference_number" => "K98YX",
         'location' => Location::NEW_YORK
     ],
     [
@@ -121,7 +143,8 @@ $jobs = [
         'title' => JobTitle::GRAPHIC_DESIGNER,
         'tags' => [JobTag::PART_TIME, JobTag::DISTANT],
         'salary' => '140',
+        "per" => PER::HOUR,
+        "job_reference_number" => "RAH1X",
         'location' => Location::SAN_FRANCISCO
     ]
 ];
-?>

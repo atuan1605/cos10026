@@ -101,7 +101,7 @@
             </div>
             <div class="job-card-footer">
               <div>
-                <div class="job-salary"> $<?= $job['salary'] ?>/hr </div>
+                <div class="job-salary"> $<?= $job['salary'] ?>/<?= $job['per']->value ?> </div>
                 <div class="job-location"> <?= $job['location']->value ?> </div>
               </div>
               <a href="/jobs.html" class="job-detail-button">Details</a>

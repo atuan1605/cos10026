@@ -106,43 +106,28 @@ foreach ($jobs as $job) {
 
     $stmt->bind_param(
         "sssssssssssiisssss",
-        $job['company_name'], $job['position'], $job['salary_range'], $job['per'],
-        $job['address'], $tags_json, $job['short_description'],
-        $job['key_responsibilities'], $job['job_reference_number'],
-        $job['title'], $job['report_to'], $job['available_position'],
-        $job['total'], $job['type'], $job['experience'],
-        $essential_json, $preferable_json, $job['logo_image']
+        $job['company_name'],
+        $job['position'],
+        $job['salary_range'],
+        $job['per'],
+        $job['address'],
+        $tags_json,
+        $job['short_description'],
+        $job['key_responsibilities'],
+        $job['job_reference_number'],
+        $job['title'],
+        $job['report_to'],
+        $job['available_position'],
+        $job['total'],
+        $job['type'],
+        $job['experience'],
+        $essential_json,
+        $preferable_json,
+        $job['logo_image']
     );
 
-    if ($stmt->execute()) {
-        echo "Job '{$job['position']}' added successfully!<br>";
-    } else {
-        die("Error inserting job: " . $conn->error);
-    }
-}
-
-// ===== Retrieve Data =====
-echo "<h2>Job Listings:</h2>";
-
-$selectJobSQL = "SELECT * FROM jobs";
-$result = $conn->query($selectJobSQL);
-
-if ($result->num_rows > 0) {
-    while ($job = $result->fetch_assoc()) {
-        echo "<h3>{$job['position']} ({$job['type']}, {$job['experience']})</h3>";
-        echo "<strong>Company:</strong> {$job['company_name']}<br>";
-        echo "<strong>Salary Range:</strong> {$job['salary_range']} per {$job['per']}<br>";
-        echo "<strong>Reports to:</strong> {$job['report_to']}<br>";
-        echo "<strong>Tags:</strong> " . implode(", ", json_decode($job['tags'], true)) . "<br>";
-        echo "<strong>Essential Skills:</strong> " . implode(", ", json_decode($job['essential'], true)) . "<br>";
-        echo "<strong>Preferable Skills:</strong> " . implode(", ", json_decode($job['preferable'], true)) . "<br>";
-        echo "<hr>";
-    }
-} else {
-    echo "No jobs found.";
+    $stmt->execute();
 }
 
 $stmt->close();
 $conn->close();
-?>
-
