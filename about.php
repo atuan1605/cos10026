@@ -14,32 +14,6 @@
 </head>
 
 <body>
-
-  <!-- HEADER & NAV -->
-  <header>
-    <div class="navbar">
-      <div class="navbar-left">
-        <div class="logo">LuckyJob</div>
-        <input type="checkbox" id="menu-toggle" />
-        <nav class="navbar-menu">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="jobs.html">Jobs</a></li>
-            <li><a href="apply.html">Apply</a></li>
-            <li><a href="about.html" class="active">About</a></li>
-            <li><a href="enhancements.html">Enhancements</a></li>
-            <li><a href="mailto:yourID@swin.edu.au">Email</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="navbar-right">
-        <div class="location">Hanoi, VN</div>
-        <img src="/styles/images/avatar.png" class="user-avatar" alt="avatar">
-        <label for="menu-toggle" class="menu-btn">&#9776; Menu</label>
-      </div>
-    </div>
-  </header>
-
   <!-- MAIN CONTENT -->
   <div class="main-content" style="flex-direction: column;">
 
@@ -102,14 +76,13 @@
     <!-- Member Detail -->
     <h2>MORE ABOUT US .....</h2>
     <?php
-require_once "./db/settings.php"; // Kết nối database
+require_once "./db/settings.php"; 
 
 $conn = new mysqli($host, $user, $pwd, $sql_db);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Truy vấn lấy danh sách thành viên
 $sql = "SELECT name, age, experience, skills, hobbies, hometown, image FROM users WHERE role = 'Member'";
 $result = $conn->query($sql);
 
@@ -149,15 +122,14 @@ $conn->close();
 
     <!-- Timetable -->
     <?php
-require_once "./db/settings.php"; // Kết nối database
+require_once "./db/settings.php";
 
 $conn = new mysqli($host, $user, $pwd, $sql_db);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Truy vấn danh sách sự kiện từ Timetable
-$sql = "SELECT date, time, task, status FROM Timetable ORDER BY date ASC";
+$sql = "SELECT date, time, task, status FROM timetables ORDER BY date ASC";
 $result = $conn->query($sql);
 
 $timetable = [];
@@ -201,32 +173,5 @@ $conn->close();
     </table>
 </section>
   </div>
-  <footer>
-    <div class="footer-container">
-      <div class="footer-column">
-        <ul>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="jobs.html">Jobs</a></li>
-          <li><a href="apply.html">Apply</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="enhancements.html">Enhancements</a></li>
-          <!-- An email link as required -->
-          <li><a href="105313596@student.swin.edu.au">Email</a></li>
-        </ul>
-      </div>
-      <div class="footer-contact">
-        <h3>Contact</h3>
-        <p>Phone: 0962863399</p>
-        <p>Email: 105313596@student.swin.edu.au</p>
-        <p>Add: 221 Burwood Highway Burwood Victoria 3125 Australia</p>
-      </div>
-      <div class="footer-time">
-        <h3>Opening</h3>
-        <p>Mon - Friday: 9AM - 5PM</p>
-        <p>Saturday: 9AM - 2PM</p>
-        <p>Sunday: 9AM - 2PM</p>
-      </div>
-    </div>
-  </footer>
 </body>
 </html>
