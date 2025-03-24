@@ -35,7 +35,7 @@
   </div>
   <!-- Section 2: Key features -->
   <?php
-  include 'trungData.php';
+  include 'companyTitleInfo.php';
   $reasonCount = count($reasons);
   $i = 0;
   ?>
@@ -68,52 +68,55 @@
   <!--Section 3-->
 
   <?php
-  include_once 'trungData.php';
+  include '../cos10026/db/create_jobs_table.php';;
   ?>
 
-  <div class="main-content">
-    <section class="content-area">
-      <h2>Recommended jobs</h2>
-      <div class="job-cards">
-        <?php
-        $i = 0;
-        while ($i < count($jobs)):
-          $job = $jobs[$i];
-        ?>
-          <div class="job-card">
-            <div id="<?= $job['jobNumber'] ?>-job-card">
-              <div class="job-card-header">
-                <span class="job-card-date"> <?= $job['date'] ?> </span>
-              </div>
-              <p class="company-name"> <?= $job['company']->value ?> </p>
-              <h3 class="job-card-title"> <?= $job['title']->value ?> </h3>
-              <div class="job-card-tags">
-                <?php
-                $j = 0;
-                while ($j < count($job['tags'])):
-                ?>
-                  <section><?= $job['tags'][$j]->value ?></section>
-                <?php
-                  $j++;
-                endwhile;
-                ?>
-              </div>
+<div class="main-content">
+  <section class="content-area">
+    <h2>Recommended jobs</h2>
+    <div class="job-cards">
+      <?php
+      $i = 0;
+      while ($i < count($jobs)):
+        $job = $jobs[$i];
+      ?>
+        <div class="job-card">
+          <div id="<?= $job['jobNumber'] ?>-job-card">
+            <div class="job-card-header">
+              <span class="job-card-date"> <?= $job['date'] ?> </span>
             </div>
-            <div class="job-card-footer">
-              <div>
-                <div class="job-salary"> $<?= $job['salary'] ?>/<?= $job['per']->value ?> </div>
-                <div class="job-location"> <?= $job['location']->value ?> </div>
-              </div>
-              <a href="/jobs.html" class="job-detail-button">Details</a>
+            <p class="company-name"> <?= $job['company_name'] ?> </p>
+            <div class="job-card-title">
+              <h3> <?= $job['title'] ?> </h3>
+              <img class="figma-image" src="<?= $job['images'] ?>" alt="">
+            </div>
+            <div class="job-card-tags">
+              <?php
+              $j = 0;
+              while ($j < count($job['tags'])):
+              ?>
+                <section><?= $job['tags'][$j] ?></section>
+              <?php
+                $j++;
+              endwhile;
+              ?>
             </div>
           </div>
-        <?php
-          $i++;
-        endwhile;
-        ?>
-      </div>
-    </section>
-  </div>
+          <div class="job-card-footer">
+            <div>
+              <div class="job-salary"> $<?= $job['salary_range'] ?>/<?= $job['per'] ?> </div>
+              <div class="job-location"> <?= $job['address'] ?> </div>
+            </div>
+            <a href="/jobs.html" class="job-detail-button">Details</a>
+          </div>
+        </div>
+      <?php
+        $i++;
+      endwhile;
+      ?>
+    </div>
+  </section>
+</div>
   <!--Section 4: scrolling-->
   <a href="#" class="scroll-to-top">↑</a>
 
