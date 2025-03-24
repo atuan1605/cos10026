@@ -101,27 +101,51 @@
 
     <!-- Member Detail -->
     <h2>MORE ABOUT US .....</h2>
-    <?php include "about_setting.php" ?>
-    <div id="member_details_container">
-      <?php foreach ($members as $member): ?>
-        <div class="info_member">
-          <img class="member-photo" src="<?= $member["image"] ?>" alt="<?= $member["name"] ?>">
-          <div class="info_member_desc">
-            <ul class="desc_details">
-              <li>
-                <h3>👋 Name: <?= $member["name"] ?></h3>
-              </li>
-              <li>🎂 Age: <?= $member["age"] ?></li>
-              <li>💼 Work experience: <?= $member["experience"] ?></li>
-              <li>🛠️ Key skills: <?= $member["skills"] ?></li>
-              <li>😍 Hobbies: <?= $member["hobbies"] ?></li>
-              <li>🏡 About my Hometown: <?= $member["hometown"] ?></li>
-            </ul>
-            <a href="mailto:105313596@student.swin.edu.au" class="contact-btn">Contact Me</a>
-          </div>
-        </div>
-      <?php endforeach; ?>
-    </div>
+    <?php
+require_once "./db/settings.php"; // Kết nối database
+
+$conn = new mysqli($host, $user, $pwd, $sql_db);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Truy vấn lấy danh sách thành viên
+$sql = "SELECT name, age, experience, skills, hobbies, hometown, image FROM users";
+$result = $conn->query($sql);
+
+$members = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $members[] = $row;
+    }
+}
+$conn->close();
+?>
+
+<div id="member_details_container">
+    <?php if (!empty($members)): ?>
+        <?php foreach ($members as $member): ?>
+            <div class="info_member">
+                <img class="member-photo" src="<?= htmlspecialchars($member["image"]) ?>" alt="<?= htmlspecialchars($member["name"]) ?>">
+                <div class="info_member_desc">
+                    <ul class="desc_details">
+                        <li>
+                            <h3>👋 Name: <?= htmlspecialchars($member["name"]) ?></h3>
+                        </li>
+                        <li>🎂 Age: <?= htmlspecialchars($member["age"]) ?></li>
+                        <li>💼 Work experience: <?= htmlspecialchars($member["experience"]) ?></li>
+                        <li>🛠️ Key skills: <?= htmlspecialchars($member["skills"]) ?></li>
+                        <li>😍 Hobbies: <?= htmlspecialchars($member["hobbies"]) ?></li>
+                        <li>🏡 About my Hometown: <?= htmlspecialchars($member["hometown"]) ?></li>
+                    </ul>
+                    <a href="mailto:105313596@student.swin.edu.au" class="contact-btn">Contact Me</a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>No members found.</p>
+    <?php endif; ?>
+</div>
 
     <!-- Timetable -->
     <?php include "about_setting.php" ?>

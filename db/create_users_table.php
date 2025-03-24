@@ -15,12 +15,19 @@ if ($tableCheckResult && $tableCheckResult->num_rows > 0) {
 } else {
     // 2. Create 'users' table
     $createTableSQL = "CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(191) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP NULL DEFAULT NULL,
-    role ENUM('Admin', 'Member', 'User') NOT NULL DEFAULT 'User'
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(191) NOT NULL UNIQUE,
+        password VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        deleted_at TIMESTAMP NULL DEFAULT NULL,
+        role ENUM('Admin', 'Member', 'User') NOT NULL DEFAULT 'User', -- Thêm dấu phẩy ở đây
+        name VARCHAR(255) NOT NULL,
+        age INT NOT NULL,
+        experience TEXT NOT NULL,
+        skills TEXT NOT NULL,
+        hobbies TEXT NOT NULL,
+        hometown VARCHAR(100) NOT NULL,
+        image VARCHAR(255) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
     if ($conn->query($createTableSQL) === TRUE) {
