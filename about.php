@@ -110,7 +110,7 @@ if ($conn->connect_error) {
 }
 
 // Truy vấn lấy danh sách thành viên
-$sql = "SELECT name, age, experience, skills, hobbies, hometown, image FROM users";
+$sql = "SELECT name, age, experience, skills, hobbies, hometown, image FROM users WHERE role = 'Member'";
 $result = $conn->query($sql);
 
 $members = [];
