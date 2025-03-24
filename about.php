@@ -148,32 +148,58 @@ $conn->close();
 </div>
 
     <!-- Timetable -->
-    <?php include "about_setting.php" ?>
-    <section style="background: #fff; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
-      <h2 id="timetable_title">Group Timetable (Assumed)</h2>
-      <table id="timetable">
+    <?php
+require_once "./db/settings.php"; // Kết nối database
+
+$conn = new mysqli($host, $user, $pwd, $sql_db);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Truy vấn danh sách sự kiện từ Timetable
+$sql = "SELECT date, time, task, status FROM Timetable ORDER BY date ASC";
+$result = $conn->query($sql);
+
+$timetable = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $timetable[] = $row;
+    }
+}
+$conn->close();
+?>
+
+<section style="background: #fff; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+    <h2 id="timetable_title">Group Timetable (Assumed)</h2>
+    <table id="timetable">
         <thead>
-          <tr id="tr_head">
-            <th>Date</th>
-            <th>Time</th>
-            <th>Tasks</th>
-            <th class="table-status">Status</th>
-          </tr>
+            <tr id="tr_head">
+                <th>Date</th>
+                <th>Time</th>
+                <th>Tasks</th>
+                <th class="table-status">Status</th>
+            </tr>
         </thead>
         <tbody>
-          <?php foreach ($timetable as $event): ?>
-            <tr>
-              <td><?= $event["date"] ?></td>
-              <td><?= $event["time"] ?></td>
-              <td><?= $event["task"] ?></td>
-              <td class="<?= $event["status"] ? 'table-status-success' : 'table-status-fail' ?>">
-                <?= $event["status"] ? "&#10004;" : "&#10008;" ?>
-              </td>
-            </tr>
-          <?php endforeach; ?>
+            <?php if (!empty($timetable)): ?>
+                <?php foreach ($timetable as $event): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($event["date"]) ?></td>
+                        <td><?= htmlspecialchars($event["time"]) ?></td>
+                        <td><?= htmlspecialchars($event["task"]) ?></td>
+                        <td class="<?= $event["status"] ? 'table-status-success' : 'table-status-fail' ?>">
+                            <?= $event["status"] ? "&#10004;" : "&#10008;" ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="4" style="text-align: center;">No timetable events found.</td>
+                </tr>
+            <?php endif; ?>
         </tbody>
-      </table>
-    </section>
+    </table>
+</section>
   </div>
   <footer>
     <div class="footer-container">
