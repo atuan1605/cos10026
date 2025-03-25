@@ -50,7 +50,6 @@ $jobs = [
         "address" => "123 Tech Street",
         "salary_range" => "1200-1800",
         'date' => '20 May, 2023',
-        'images' => './styles/images/dribble.png',
         "tags" => ["HTML", "CSS", "JS", "React", "Vue"],
         "short_description" => "Responsible for creating engaging, user-friendly web interfaces and ensuring cross-browser compatibility.",
         "key_responsibilities" => "Implement new frontend features and functionality\nOptimize code for maximum performance\nCollaborate with UX designers and backend developers",
@@ -61,7 +60,7 @@ $jobs = [
         "experience" => "Expert",
         "essential" => ["Proficient in HTML5, CSS3, JS (2+ years)", "Experience with React or Vue"],
         "preferable" => ["Familiarity with Docker and CI/CD", "Good communication in English"],
-        "logo_image" => "techcorp_logo.png"
+        "logo_image" => "./styles/images/dribble.png"
     ],
     [
         'jobNumber' => 'second',
@@ -72,7 +71,6 @@ $jobs = [
         "address" => "456 Design Avenue",
         "salary_range" => "100-800",
         'date' => '15 June, 2023',
-        'images' => './styles/images/figma.png',
         "tags" => ["UX", "UI", "Figma", "Sketch"],
         "short_description" => "Plan and create visually appealing, user-centered interfaces for both web and mobile platforms.",
         "key_responsibilities" => "Develop wireframes and prototypes\nDesign UI based on core UX principles\nConduct user research and A/B testing",
@@ -83,7 +81,7 @@ $jobs = [
         "experience" => "Intern",
         "essential" => ["Figma or Sketch proficiency", "Solid grasp of UX best practices"],
         "preferable" => ["Illustration skills", "Familiar with Agile/Scrum"],
-        "logo_image" => "designify_logo.png"
+        "logo_image" => "./styles/images/figma.png"
     ],
     [
         'jobNumber' => 'first',

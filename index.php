@@ -88,7 +88,7 @@
             <p class="company-name"> <?= $job['company_name'] ?> </p>
             <div class="job-card-title">
               <h3> <?= $job['title'] ?> </h3>
-              <img class="figma-image" src="<?= $job['images'] ?>" alt="">
+              <img class="figma-image" src="<?= $job['logo_image'] ?>" alt="imgs">
             </div>
             <div class="job-card-tags">
               <?php
