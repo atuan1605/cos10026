@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-
+ 
 <header>
   <div class="navbar">
     <div class="navbar-left">
