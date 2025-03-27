@@ -140,16 +140,39 @@ nav a:hover {
 }
 
 /* Search bar + filters row */
+.filter-container {
+  width: 100%;
+  font-size: small;
+  gap: 1rem;
+  border-radius: 8px;
+  padding: 1rem;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+.enter-searching-btn {
+  margin-left: 1rem !important;
+  height: 100%;
+  border-radius:8px !important;
+  text-align: center;
+}
+#searching-space {
+  height: 100%;
+  position: relative;
+}
+.searching-bar {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 1rem;
+}
 .filter-bar {
   width: 100%;
   display: flex;
   font-size: small;
   gap: 1rem;
-  background: #fff;
   border-radius: 8px;
-  padding: 1rem;
+  padding:  0.3rem 1rem;
   align-items: center;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
 }
 
 .filter-bar select {
