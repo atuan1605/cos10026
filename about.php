@@ -11,9 +11,6 @@
 
   <!-- HEADER & NAV -->
   <?php include 'header.php';?>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fondamento:ital@0;1&family=Satisfy&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -280,7 +277,7 @@
     <!-- Member Detail -->
     <h2>MORE ABOUT US .....</h2>
     <?php
-require_once "./db/settings.php"; 
+require_once "./db/settings.php";
 
 $conn = new mysqli($host, $user, $pwd, $sql_db);
 if ($conn->connect_error) {
