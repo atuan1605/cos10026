@@ -61,7 +61,12 @@
 
     <!-- JOB DESCRIPTIONS -->
     <section class="content-job-area">
-      <div class="filter-bar">
+      <div class="filter-container">
+        <div class="searching-bar">
+          <input type="text" id="searching-space" placeholder="Search here...">
+          <button type="submit" class="enter-searching-btn">Enter</button>
+        </div>
+        <div class="filter-bar">
         <select name="position">
           <option>Designer</option>
           <option>Developer</option>
@@ -90,6 +95,7 @@
         <div class="salary-range">
           <label for="salaryRange">Salary range</label>
           <input type="range" id="salaryRange" min="1200" max="20000" value="5000" />
+        </div>
         </div>
       </div>
       <h1>Current Openings</h1>
@@ -225,35 +231,7 @@
       </article>
     </section>
   </div>
-    <footer>
-      <div class="footer-container">
-        <div class="footer-column">
-          <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="jobs.html">Jobs</a></li>
-            <li><a href="apply.html">Apply</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="enhancements.html">Enhancements</a></li>
-            <!-- An email link as required -->
-            <li><a href="105313596@student.swin.edu.au">Email</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-contact">
-          <h3>Contact</h3>
-          <p>Phone: 0962863399</p>
-          <p>Email: 105313596@student.swin.edu.au</p>
-          <p>Add: 221 Burwood Highway Burwood Victoria 3125 Australia</p>
-        </div>
-
-        <div class="footer-time">
-          <h3>Opening</h3>
-          <p>Mon - Friday: 9AM - 5PM</p>
-          <p>Saturday: 9AM - 2PM</p>
-          <p>Sunday: 9AM - 2PM</p>
-        </div>
-      </div>
-    </footer>
+  <?php include 'footer.php';?>
 </body>
 
 </html>
