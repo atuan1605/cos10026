@@ -32,7 +32,9 @@ if ($tableCheckResult && $tableCheckResult->num_rows === 0) {
         experience ENUM('Expert', 'Intern', 'Fresher', 'Junior') DEFAULT 'Junior',
         essential TEXT,
         preferable TEXT,
-        logo_image TEXT
+        logo_image TEXT,
+        working_schedule ENUM('Full time', 'Part time', 'Internship', 'Project work', 'Volunteering') DEFAULT NULL,
+        employment_types TEXT 
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
     if (!$conn->query($createTableSQL)) {
@@ -60,7 +62,10 @@ $jobs = [
         "experience" => "Expert",
         "essential" => ["Proficient in HTML5, CSS3, JS (2+ years)", "Experience with React or Vue"],
         "preferable" => ["Familiarity with Docker and CI/CD", "Good communication in English"],
-        "logo_image" => "./styles/images/dribble.png"
+        "logo_image" => "./styles/images/dribble.png",
+        "working_schedule" => "Full time",
+        "employment_types" => ["Full day", "Flexible schedule"]
+
     ],
     [
         'jobNumber' => 'second',
@@ -81,7 +86,10 @@ $jobs = [
         "experience" => "Intern",
         "essential" => ["Figma or Sketch proficiency", "Solid grasp of UX best practices"],
         "preferable" => ["Illustration skills", "Familiar with Agile/Scrum"],
-        "logo_image" => "./styles/images/figma.png"
+        "logo_image" => "./styles/images/figma.png",
+        "working_schedule" => "Part time",
+        "employment_types" => ["Flexible schedule", "Shift method"]
+
     ],
     [
         'jobNumber' => 'first',
@@ -102,7 +110,9 @@ $jobs = [
         "experience" => "Junior",
         "essential" => ["Proficient in Node.js and Express", "Understanding of databases (SQL/NoSQL)"],
         "preferable" => ["Experience with Docker", "Knowledge of cloud services"],
-        "logo_image" => "cloudnet_logo.png"
+        "logo_image" => "cloudnet_logo.png",
+        "working_schedule" => "Part time",
+        "employment_types" => ["Shift method", "Flexible schedule"]
     ],
     [
         'jobNumber' => 'third',
@@ -123,7 +133,9 @@ $jobs = [
         "experience" => "Fresher",
         "essential" => ["Familiarity with Flutter and Dart", "Understanding of mobile app lifecycle"],
         "preferable" => ["Experience with Firebase", "Basic knowledge of native Android/iOS"],
-        "logo_image" => "appify_logo.png"
+        "logo_image" => "appify_logo.png",
+        "working_schedule" => "Internship",
+        "employment_types" => ["Shift work", "Flexible schedule"]
     ],
     [
         'jobNumber' => 'last',
@@ -144,7 +156,9 @@ $jobs = [
         "experience" => "Junior",
         "essential" => ["Proficiency in SQL and Python", "Experience with data visualization tools"],
         "preferable" => ["Machine learning knowledge", "Strong presentation skills"],
-        "logo_image" => "dataworks_logo.png"
+        "logo_image" => "dataworks_logo.png",
+        "working_schedule" => "Project work",
+        "employment_types" => ["Full day", "Distant work"]
     ],
     [
         'jobNumber' => 'fifth',
@@ -165,7 +179,9 @@ $jobs = [
         "experience" => "Junior",
         "essential" => ["Experience with SIEM tools", "Understanding of network protocols"],
         "preferable" => ["Cybersecurity certifications (e.g., CISSP, CEH)", "Knowledge of threat intelligence"],
-        "logo_image" => "cybersec_logo.png"
+        "logo_image" => "cybersec_logo.png",
+        "working_schedule" => "Full Time",
+        "employment_types" => ["Full day", "Distant work"]
     ]
 ];
 
@@ -175,9 +191,9 @@ $insertJobSQL = "
         company_name, position, salary_range, per, address, tags,
         short_description, key_responsibilities, job_reference_number,
         title, report_to, available_position, total, type, experience,
-        essential, preferable, logo_image
+        essential, preferable, logo_image, working_schedule, employment_types
     ) VALUES (
-        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
     ) ON DUPLICATE KEY UPDATE job_reference_number = job_reference_number";
 
 $stmt = $conn->prepare($insertJobSQL);
@@ -186,9 +202,10 @@ foreach ($jobs as $job) {
     $tags_json = json_encode($job['tags']);
     $essential_json = json_encode($job['essential']);
     $preferable_json = json_encode($job['preferable']);
+    $employment_types_json = json_encode($job['employment_types']);
 
     $stmt->bind_param(
-        "sssssssssssiisssss",
+        "ssssssssssssiissssss",
         $job['company_name'],
         $job['position'],
         $job['salary_range'],
@@ -200,13 +217,15 @@ foreach ($jobs as $job) {
         $job['job_reference_number'],
         $job['title'],
         $job['report_to'],
-        $job['available_position'],
-        $job['total'],
+        $job['available_position'], // INT
+        $job['total'],              // INT
         $job['type'],
         $job['experience'],
         $essential_json,
         $preferable_json,
-        $job['logo_image']
+        $job['logo_image'],
+        $job['working_schedule'],
+        $employment_types_json
     );
 
     $stmt->execute();
