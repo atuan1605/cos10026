@@ -100,70 +100,98 @@
       </div>
       <h1>Current Openings</h1>
 
-      <article>
+      <?php
+require_once './db/settings.php'; // Import kết nối database
+
+$conn = new mysqli($host, $user, $pwd, $sql_db);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Lấy danh sách công việc từ database
+$sql = "SELECT * FROM jobs"; // Giả sử bảng lưu job là `jobs`
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+?>
+    <article>
         <div class="job-title">
-          <h2 id="job-name">Frontend Developer</h2>
-          <div class="short-description">
-            <p id="work-type">Remote</p>
-            <p id="experience">Expert</p>
-          </div>
+            <h2 id="job-name"><?php echo htmlspecialchars($row['title']); ?></h2>
+            <div class="short-description">
+                <p id="work-type"><?php echo htmlspecialchars($row['type']); ?></p>
+                <p id="experience"><?php echo htmlspecialchars($row['experience']); ?></p>
+            </div>
         </div>
         <div class="job-description-content">
-          <div class="job-left-content">
-            <div class="description">
-              <h3>Short Description:</h3>
-              <p>
-                Responsible for creating engaging,
-                user-friendly web interfaces and ensuring cross-browser compatibility.
-              </p>
-            </div>
+            <div class="job-left-content">
+                <div class="description">
+                    <h3>Short Description:</h3>
+                    <p><?php echo htmlspecialchars($row['short_description']); ?></p>
+                </div>
 
-            <div class="responsibilities">
-              <h3>Key Responsibilities:</h3>
-              <ul>
-                <li>Implement new frontend features and functionality</li>
-                <li>Optimize code for maximum performance</li>
-                <li>Collaborate with UX designers and backend developers</li>
-              </ul>
-            </div>
+                <div class="responsibilities">
+                    <h3>Key Responsibilities:</h3>
+                    <ul>
+                        <?php 
+                        $responsibilities = explode("\n", $row['key_responsibilities']);
+                        foreach ($responsibilities as $task) {
+                            echo "<li>" . htmlspecialchars(trim($task)) . "</li>";
+                        }
+                        ?>
+                    </ul>
+                </div>
 
-            <div class="requirement">
-              <h3>Requirements:</h3>
-              <ol>
-                <li>Essential:
-                  <ul>
-                    <li id="essential">Proficient in HTML5, CSS3, JS (2+ years)</li>
-                    <li id="essential">Experience with React or Vue</li>
-                  </ul>
-                </li>
-                <li>Preferable:
-                  <ul>
-                    <li id="essential">Familiarity with Docker and CI/CD</li>
-                    <li id="essential">Good communication in English</li>
-                  </ul>
-                </li>
-              </ol>
+                <div class="requirement">
+                    <h3>Requirements:</h3>
+                    <ol>
+                        <li>Essential:
+                            <ul>
+                                <?php 
+                                $essentials = explode("|", $row['essential']); // Giả sử dữ liệu được lưu với dấu `|`
+                                foreach ($essentials as $requirement) {
+                                    echo "<li>" . htmlspecialchars(trim($requirement)) . "</li>";
+                                }
+                                ?>
+                            </ul>
+                        </li>
+                        <li>Preferable:
+                            <ul>
+                                <?php 
+                                $preferables = explode("|", $row['preferable']); // Giả sử dữ liệu được lưu với dấu `|`
+                                foreach ($preferables as $preference) {
+                                    echo "<li>" . htmlspecialchars(trim($preference)) . "</li>";
+                                }
+                                ?>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
             </div>
-
-
-          </div>
-          <div class="job-right-content">
-            <div class="info">
-              <h3>Infomation:</h3>
-              <p></p><strong>Reference No.:</strong> FE123</p>
-              <p><strong>Title:</strong> Frontend Developer</p>
-              <p><strong>Salary Range:</strong> $1200 - $2000 per week</p>
-              <p><strong>Reports to:</strong> Head of Engineering</p>
+            <div class="job-right-content">
+                <div class="info">
+                    <h3>Information:</h3>
+                    <p><strong>Reference No.:</strong> <?php echo htmlspecialchars($row['job_reference_number']); ?></p>
+                    <p><strong>Title:</strong> <?php echo htmlspecialchars($row['title']); ?></p>
+                    <p><strong>Salary Range:</strong> $<?php echo htmlspecialchars($row['salary_range']); ?> per <?php echo htmlspecialchars($row['per']); ?></p>
+                    <p><strong>Reports to:</strong> <?php echo htmlspecialchars($row['report_to']); ?></p>
+                </div>
+                <div class="other-info">
+                    <h3>Other Information:</h3>
+                    <p><strong><?php echo htmlspecialchars($row['total']); ?>+</strong> hiring people, <strong><?php echo htmlspecialchars($row['available_position']); ?></strong> is active</p>
+                </div>
+                <a href="apply.html"> <button>Apply</button> </a>
             </div>
-            <div class="other-info">
-              <h3>Other Information:</h3>
-              <p><strong>20+</strong> hiring people, <strong>5</strong> is active</p>
-            </div>
-            <a href="apply.html"> <button>Apply</button> </a>
-          </div>
         </div>
-      </article>
-      <!---->
+    </article>
+<?php
+    }
+} else {
+    echo "<p>No jobs found.</p>";
+}
+
+$conn->close();
+?>
 
       <article>
         <div class="job-title">

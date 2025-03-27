@@ -167,7 +167,7 @@ $jobs = [
         "experience" => "Intermediate",
         "essential" => ["Experience with SIEM tools", "Understanding of network protocols"],
         "preferable" => ["Cybersecurity certifications (e.g., CISSP, CEH)", "Knowledge of threat intelligence"],
-        "logo_image" => "cybersec_logo.png"
+        "logo_image"                                                                                                                                                                        => "cybersec_logo.png"
     ]
 ];
 
