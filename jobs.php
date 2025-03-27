@@ -142,15 +142,22 @@
                   </ul>
                 </div>
 
+
+
+
                 <div class="requirement">
                   <h3>Requirements:</h3>
                   <ol>
                     <li>Essential:
                       <ul>
                         <?php
-                        $essentials = explode("|", $row['essential']); // Giả sử dữ liệu được lưu với dấu `|`
-                        foreach ($essentials as $requirement) {
-                          echo "<li>" . htmlspecialchars(trim($requirement)) . "</li>";
+                        $essentials = json_decode($row['essential'], true); // Decode JSON to array
+                        if (is_array($essentials)) { // Ensure it's an array before looping
+                          foreach ($essentials as $requirement) {
+                            echo "<li>" . htmlspecialchars($requirement) . "</li>";
+                          }
+                        } else {
+                          echo "<li>No essential requirements listed.</li>";
                         }
                         ?>
                       </ul>
@@ -158,15 +165,21 @@
                     <li>Preferable:
                       <ul>
                         <?php
-                        $preferables = explode("|", $row['preferable']); // Giả sử dữ liệu được lưu với dấu `|`
-                        foreach ($preferables as $preference) {
-                          echo "<li>" . htmlspecialchars(trim($preference)) . "</li>";
+                        $preferables = json_decode($row['preferable'], true); // Decode JSON to array
+                        if (is_array($preferables)) {
+                          foreach ($preferables as $preference) {
+                            echo "<li>" . htmlspecialchars($preference) . "</li>";
+                          }
+                        } else {
+                          echo "<li>No preferable requirements listed.</li>";
                         }
                         ?>
                       </ul>
                     </li>
                   </ol>
                 </div>
+
+
               </div>
               <div class="job-right-content">
                 <div class="info">
@@ -192,71 +205,6 @@
 
       $conn->close();
       ?>
-
-      <article>
-        <div class="job-title">
-          <h2 id="job-name">UI/UX Designer</h2>
-          <div class="short-description">
-            <p id="work-type">On-site</p>
-            <p id="experience">Intern</p>
-          </div>
-        </div>
-        <div class="job-description-content">
-          <div class="job-left-content">
-            <div class="description">
-              <h3>Short Description:</h3>
-              <p>
-                Plan and create visually appealing,
-                user-centered interfaces for both web and mobile platforms.
-              </p>
-            </div>
-
-            <div class="responsibilities">
-              <h3>Key Responsibilities:</h3>
-              <ul>
-                <li>Develop wireframes and prototypes.</li>
-                <li>Design UI based on core UX principles.</li>
-                <li>Conduct user research and A/B testing.</li>
-              </ul>
-            </div>
-
-            <div class="requirement">
-              <h3>Requirements:</h3>
-              <ol>
-                <li>Essential:
-                  <ul>
-                    <li id="essential">Figma or Sketch proficiency</li>
-                    <li id="essential">Solid grasp of UX best practices</li>
-                  </ul>
-                </li>
-                <li>Preferable:
-                  <ul>
-                    <li id="essential">Illustration skills</li>
-                    <li id="essential">Familiar with Agile/Scrum</li>
-                  </ul>
-                </li>
-              </ol>
-            </div>
-
-
-          </div>
-          <div class="job-right-content">
-            <div class="info">
-              <h3>Infomation:</h3>
-              <p></p><strong>Reference No.:</strong> UX789</p>
-              <p><strong>Title:</strong> UI/UX Designer</p>
-              <p><strong>Salary Range:</strong> $100 - $800 per week</p>
-              <p><strong>Reports to:</strong> Product Manager</p>
-            </div>
-            <div class="other-info">
-              <h3>Other Information:</h3>
-              <p><strong>30+</strong> hiring people, <strong>1</strong> is active</p>
-            </div>
-            <a href="apply.html"> <button>Apply</button> </a>
-
-          </div>
-        </div>
-      </article>
     </section>
   </div>
   <?php include 'footer.php'; ?>
