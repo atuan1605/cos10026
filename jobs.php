@@ -10,7 +10,7 @@
 <body>
 
   <!-- HEADER & NAV -->
-  <?php include 'header.php';?>
+  <?php include 'header.php'; ?>
   <!-- MAIN CONTENT -->
   <div class="main-content">
 
@@ -67,131 +67,131 @@
           <button type="submit" class="enter-searching-btn">Enter</button>
         </div>
         <div class="filter-bar">
-        <select name="position">
-          <option>Designer</option>
-          <option>Developer</option>
-          <option>Product Manager</option>
-        </select>
+          <select name="position">
+            <option>Designer</option>
+            <option>Developer</option>
+            <option>Product Manager</option>
+          </select>
 
-        <select name="location">
-          <option>Work Location</option>
-          <option>Remote</option>
-          <option>On-site</option>
-        </select>
+          <select name="location">
+            <option>Work Location</option>
+            <option>Remote</option>
+            <option>On-site</option>
+          </select>
 
-        <select name="experience">
-          <option>Experience</option>
-          <option>Junior</option>
-          <option>Middle</option>
-          <option>Senior</option>
-        </select>
+          <select name="experience">
+            <option>Experience</option>
+            <option>Junior</option>
+            <option>Middle</option>
+            <option>Senior</option>
+          </select>
 
-        <select name="perMonth">
-          <option>Per month</option>
-          <option>Per hour</option>
-          <option>Per day</option>
-        </select>
+          <select name="perMonth">
+            <option>Per month</option>
+            <option>Per hour</option>
+            <option>Per day</option>
+          </select>
 
-        <div class="salary-range">
-          <label for="salaryRange">Salary range</label>
-          <input type="range" id="salaryRange" min="1200" max="20000" value="5000" />
-        </div>
+          <div class="salary-range">
+            <label for="salaryRange">Salary range</label>
+            <input type="range" id="salaryRange" min="1200" max="20000" value="5000" />
+          </div>
         </div>
       </div>
       <h1>Current Openings</h1>
 
       <?php
-require_once './db/settings.php'; // Import kết nối database
+      require_once './db/settings.php'; // Import kết nối database
 
-$conn = new mysqli($host, $user, $pwd, $sql_db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+      $conn = new mysqli($host, $user, $pwd, $sql_db);
+      if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      }
 
-// Lấy danh sách công việc từ database
-$sql = "SELECT * FROM jobs"; // Giả sử bảng lưu job là `jobs`
-$result = $conn->query($sql);
+      // Lấy danh sách công việc từ database
+      $sql = "SELECT * FROM jobs"; // Giả sử bảng lưu job là `jobs`
+      $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-?>
-    <article>
-        <div class="job-title">
-            <h2 id="job-name"><?php echo htmlspecialchars($row['title']); ?></h2>
-            <div class="short-description">
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+      ?>
+          <article>
+            <div class="job-title">
+              <h2 id="job-name"><?php echo htmlspecialchars($row['title']); ?></h2>
+              <div class="short-description">
                 <p id="work-type"><?php echo htmlspecialchars($row['type']); ?></p>
                 <p id="experience"><?php echo htmlspecialchars($row['experience']); ?></p>
+              </div>
             </div>
-        </div>
-        <div class="job-description-content">
-            <div class="job-left-content">
+            <div class="job-description-content">
+              <div class="job-left-content">
                 <div class="description">
-                    <h3>Short Description:</h3>
-                    <p><?php echo htmlspecialchars($row['short_description']); ?></p>
+                  <h3>Short Description:</h3>
+                  <p><?php echo htmlspecialchars($row['short_description']); ?></p>
                 </div>
 
                 <div class="responsibilities">
-                    <h3>Key Responsibilities:</h3>
-                    <ul>
-                        <?php 
-                        $responsibilities = explode("\n", $row['key_responsibilities']);
-                        foreach ($responsibilities as $task) {
-                            echo "<li>" . htmlspecialchars(trim($task)) . "</li>";
-                        }
-                        ?>
-                    </ul>
+                  <h3>Key Responsibilities:</h3>
+                  <ul>
+                    <?php
+                    $responsibilities = explode("\n", $row['key_responsibilities']);
+                    foreach ($responsibilities as $task) {
+                      echo "<li>" . htmlspecialchars(trim($task)) . "</li>";
+                    }
+                    ?>
+                  </ul>
                 </div>
 
                 <div class="requirement">
-                    <h3>Requirements:</h3>
-                    <ol>
-                        <li>Essential:
-                            <ul>
-                                <?php 
-                                $essentials = explode("|", $row['essential']); // Giả sử dữ liệu được lưu với dấu `|`
-                                foreach ($essentials as $requirement) {
-                                    echo "<li>" . htmlspecialchars(trim($requirement)) . "</li>";
-                                }
-                                ?>
-                            </ul>
-                        </li>
-                        <li>Preferable:
-                            <ul>
-                                <?php 
-                                $preferables = explode("|", $row['preferable']); // Giả sử dữ liệu được lưu với dấu `|`
-                                foreach ($preferables as $preference) {
-                                    echo "<li>" . htmlspecialchars(trim($preference)) . "</li>";
-                                }
-                                ?>
-                            </ul>
-                        </li>
-                    </ol>
+                  <h3>Requirements:</h3>
+                  <ol>
+                    <li>Essential:
+                      <ul>
+                        <?php
+                        $essentials = explode("|", $row['essential']); // Giả sử dữ liệu được lưu với dấu `|`
+                        foreach ($essentials as $requirement) {
+                          echo "<li>" . htmlspecialchars(trim($requirement)) . "</li>";
+                        }
+                        ?>
+                      </ul>
+                    </li>
+                    <li>Preferable:
+                      <ul>
+                        <?php
+                        $preferables = explode("|", $row['preferable']); // Giả sử dữ liệu được lưu với dấu `|`
+                        foreach ($preferables as $preference) {
+                          echo "<li>" . htmlspecialchars(trim($preference)) . "</li>";
+                        }
+                        ?>
+                      </ul>
+                    </li>
+                  </ol>
                 </div>
-            </div>
-            <div class="job-right-content">
+              </div>
+              <div class="job-right-content">
                 <div class="info">
-                    <h3>Information:</h3>
-                    <p><strong>Reference No.:</strong> <?php echo htmlspecialchars($row['job_reference_number']); ?></p>
-                    <p><strong>Title:</strong> <?php echo htmlspecialchars($row['title']); ?></p>
-                    <p><strong>Salary Range:</strong> $<?php echo htmlspecialchars($row['salary_range']); ?> per <?php echo htmlspecialchars($row['per']); ?></p>
-                    <p><strong>Reports to:</strong> <?php echo htmlspecialchars($row['report_to']); ?></p>
+                  <h3>Information:</h3>
+                  <p><strong>Reference No.:</strong> <?php echo htmlspecialchars($row['job_reference_number']); ?></p>
+                  <p><strong>Title:</strong> <?php echo htmlspecialchars($row['title']); ?></p>
+                  <p><strong>Salary Range:</strong> $<?php echo htmlspecialchars($row['salary_range']); ?> per <?php echo htmlspecialchars($row['per']); ?></p>
+                  <p><strong>Reports to:</strong> <?php echo htmlspecialchars($row['report_to']); ?></p>
                 </div>
                 <div class="other-info">
-                    <h3>Other Information:</h3>
-                    <p><strong><?php echo htmlspecialchars($row['total']); ?>+</strong> hiring people, <strong><?php echo htmlspecialchars($row['available_position']); ?></strong> is active</p>
+                  <h3>Other Information:</h3>
+                  <p><strong><?php echo htmlspecialchars($row['total']); ?>+</strong> hiring people, <strong><?php echo htmlspecialchars($row['available_position']); ?></strong> is active</p>
                 </div>
                 <a href="apply.html"> <button>Apply</button> </a>
+              </div>
             </div>
-        </div>
-    </article>
-<?php
-    }
-} else {
-    echo "<p>No jobs found.</p>";
-}
+          </article>
+      <?php
+        }
+      } else {
+        echo "<p>No jobs found.</p>";
+      }
 
-$conn->close();
-?>
+      $conn->close();
+      ?>
 
       <article>
         <div class="job-title">
@@ -259,7 +259,7 @@ $conn->close();
       </article>
     </section>
   </div>
-  <?php include 'footer.php';?>
+  <?php include 'footer.php'; ?>
 </body>
 
 </html>
