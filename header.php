@@ -1,3 +1,9 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <header>
   <div class="navbar">
     <div class="navbar-left">
@@ -14,10 +20,18 @@
         </ul>
       </nav>
     </div>
+
     <div class="navbar-right">
       <div class="location">Hanoi, VN</div>
-      <img src="./styles/images/avatar.png" class="user-avatar" alt="User Avatar">
-      <label for="menu-toggle" class="menu-btn">&#9776; Menu</label>
+
+      <?php if (isset($_SESSION['user'])): ?>
+        <img src="<?php echo $_SESSION['user']['avatar'] ?? './styles/images/avatar.png'; ?>" class="user-avatar" alt="avatar">
+        <label for="menu-toggle" class="menu-btn">&#9776; Menu</label>
+        <div class="logout-btn"><a href="logout.php">Logout</a></div>
+      <?php else: ?>
+        <label for="menu-toggle" class="menu-btn">&#9776; Menu</label>
+        <div class="logout-btn"><a href="signin.php">Sign In</a></div>
+      <?php endif; ?>
     </div>
   </div>
 </header>
