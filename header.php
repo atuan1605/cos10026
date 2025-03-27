@@ -11,12 +11,12 @@ if (session_status() === PHP_SESSION_NONE) {
       <input type="checkbox" id="menu-toggle" />
       <nav class="navbar-menu">
         <ul>
-          <li><a href="index.php" class="active">Home</a></li>
-          <li><a href="jobs.php">Jobs</a></li>
-          <li><a href="apply.php">Apply</a></li>
-          <li><a href="about.php">About</a></li>
-          <li><a href="enhancements.php">Enhancements</a></li>
-          <li><a href="mailto:105313596@student.swin.edu.au">Email</a></li>
+          <li><a href="index.php" class="<?= basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : '' ?>">Home</a></li>
+          <li><a href="jobs.php" class="<?= basename($_SERVER['PHP_SELF']) == 'jobs.php' ? 'active' : '' ?>">Jobs</a></li>
+          <li><a href="apply.php" class="<?= basename($_SERVER['PHP_SELF']) == 'apply.php' ? 'active' : '' ?>">Apply</a></li>
+          <li><a href="about.php" class="<?= basename($_SERVER['PHP_SELF']) == 'about.php' ? 'active' : '' ?>">About</a></li>
+          <li><a href="enhancements.php" class="<?= basename($_SERVER['PHP_SELF']) == 'enhancements.php' ? 'active' : '' ?>">Enhancements</a></li>
+          <li><a href="mailto:105313596@student.swin.edu.au">Email</a></li> <!-- Fixed email link -->
         </ul>
       </nav>
     </div>
