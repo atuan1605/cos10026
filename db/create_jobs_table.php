@@ -214,4 +214,3 @@ foreach ($jobs as $job) {
 
 $stmt->close();
 $conn->close();
-

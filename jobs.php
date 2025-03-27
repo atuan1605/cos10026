@@ -141,10 +141,6 @@
                     ?>
                   </ul>
                 </div>
-
-
-
-
                 <div class="requirement">
                   <h3>Requirements:</h3>
                   <ol>
@@ -178,8 +174,6 @@
                     </li>
                   </ol>
                 </div>
-
-
               </div>
               <div class="job-right-content">
                 <div class="info">
@@ -202,7 +196,6 @@
       } else {
         echo "<p>No jobs found.</p>";
       }
-
       $conn->close();
       ?>
     </section>
