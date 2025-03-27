@@ -1,5 +1,5 @@
 <?php
-require_once("settings.php");
+require_once './settings.php'; 
 
 $conn = new mysqli($host, $user, $pwd, $sql_db);
 if ($conn->connect_error) {
@@ -16,10 +16,10 @@ if ($tableCheckResult && $tableCheckResult->num_rows > 0) {
         id INT AUTO_INCREMENT PRIMARY KEY,
         date DATE NOT NULL,
         time VARCHAR(20) NOT NULL,
-        task VARCHAR(255) NOT NULL, 
+        task VARCHAR(255) NOT NULL,
         status BOOLEAN NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        UNIQUE(date, time, task)  
+        UNIQUE(date, time, task)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
 if ($conn->query($createTableSQL) === TRUE) {
@@ -30,7 +30,7 @@ if ($conn->query($createTableSQL) === TRUE) {
 }
 
 // Lệnh INSERT IGNORE để tránh trùng lặp
-$insertTimetableSQL = "INSERT IGNORE INTO timetables (date, time, task, status) VALUES 
+$insertTimetableSQL = "INSERT IGNORE INTO timetables (date, time, task, status) VALUES
 ('2025-02-10', '8:00 - 11:00', 'Summarize the assignment requirements and grading criteria', TRUE),
 ('2025-02-15', '13:00 - 16:00', 'Assign tasks and finalize code submission approach', TRUE),
 ('2025-02-16', '9:00 - 12:00', 'Work on individually assigned tasks', TRUE),
