@@ -83,9 +83,9 @@
 
       // Xử lý tìm kiếm theo từ khóa
       if (!empty($_GET['title'])) {
-        $title = "%" . trim($_GET['title']) . "%"; // Thêm % cho LIKE
-        $sql .= " AND (title LIKE ? OR description LIKE ?)";
-    }
+        $title = $conn->real_escape_string(trim($_GET['title'])) . "%";
+        $sql .= " AND (title LIKE '$title')";
+      }
       // Lọc theo vị trí công việc
       if (!empty($_GET['position'])) {
         $position = $conn->real_escape_string($_GET['position']);
@@ -114,15 +114,44 @@
       $result = $conn->query($sql);
       ?>
 
+      <?php
+      $search = isset($_POST['search']) ? trim($_POST['search']) : '';
+
+      $conn = new mysqli($host, $user, $pwd, $sql_db);
+
+      if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      }
+
+      if (!empty($search)) {
+        // Convert search term to lowercase and sanitize input
+        $search = strtolower(trim($search)); // Ensure it's lowercase and trimmed
+        $search = $conn->real_escape_string($search); // Escape input for safety
+
+        // Ensure that the search only matches the start of job titles
+        $sql = "SELECT * FROM jobs WHERE job_title LIKE '$search%' ORDER BY job_title ASC";
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+            echo "<p>" . htmlspecialchars($row['job_title']) . "</p>";
+          }
+        } else {
+          echo "<p style='width: 100%; text-align: center;'>No results found</p>";
+        }
+      }
+      ?>
+
       <!-- JOB DESCRIPTIONS -->
       <section class="content-job-area">
         <form method="GET" action="">
           <div class="filter-container">
             <div class="searching-bar">
-            <input type="text" name="title" id="searching-space"
-             placeholder="Search here..."
-             value="<?php echo isset($_GET['title']) ? htmlspecialchars($_GET['title']) : ''; ?>">
-        <button type="submit" class="enter-searching-btn">Search</button>
+              <input type="text" name="title" id="searching-space"
+                placeholder="Search here..."
+                value="<?php echo isset($_GET['title']) ? htmlspecialchars($_GET['title']) : ''; ?>">
+              <button type="submit" class="enter-searching-btn">Search</button>
             </div>
 
             <div class="filter-bar">
@@ -158,15 +187,11 @@
         <h1>Current Openings</h1>
 
         <?php
-        require_once './db/settings.php'; // Import kết nối database
-
+        require_once './db/settings.php'; 
         $conn = new mysqli($host, $user, $pwd, $sql_db);
         if ($conn->connect_error) {
           die("Connection failed: " . $conn->connect_error);
         }
-
-        // Lấy danh sách công việc từ database
-        // Giả sử bảng lưu job là `jobs`
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
