@@ -81,50 +81,80 @@
         $sql .= implode(" OR ", $conditions) . ")";
       }
 
+      // Xử lý tìm kiếm theo từ khóa
+      if (!empty($_GET['title'])) {
+        $title = "%" . trim($_GET['title']) . "%"; // Thêm % cho LIKE
+        $sql .= " AND (title LIKE ? OR description LIKE ?)";
+    }
+      // Lọc theo vị trí công việc
+      if (!empty($_GET['position'])) {
+        $position = $conn->real_escape_string($_GET['position']);
+        $sql .= " AND position = '$position'";
+      }
+
+      // Lọc theo địa điểm làm việc
+      if (!empty($_GET['type'])) {
+        $type = $conn->real_escape_string($_GET['type']);
+        $sql .= " AND type = '$type'";
+      }
+
+      // Lọc theo kinh nghiệm
+      if (!empty($_GET['experience'])) {
+        $experience = $conn->real_escape_string($_GET['experience']);
+        $sql .= " AND experience = '$experience'";
+      }
+
+      // Lọc theo hình thức trả lương
+      if (!empty($_GET['per'])) {
+        $per = $conn->real_escape_string($_GET['per']);
+        $sql .= " AND per = '$per'";
+      }
+
       // Execute Filtered Query
       $result = $conn->query($sql);
       ?>
 
       <!-- JOB DESCRIPTIONS -->
       <section class="content-job-area">
-        <div class="filter-container">
-          <div class="searching-bar">
-            <input type="text" id="searching-space" placeholder="Search here...">
-            <button type="submit" class="enter-searching-btn">Search</button>
-            </form>
-          </div>
-          <div class="filter-bar">
-            <select name="position">
-              <option>Designer</option>
-              <option>Developer</option>
-              <option>Product Manager</option>
-            </select>
+        <form method="GET" action="">
+          <div class="filter-container">
+            <div class="searching-bar">
+            <input type="text" name="title" id="searching-space"
+             placeholder="Search here..."
+             value="<?php echo isset($_GET['title']) ? htmlspecialchars($_GET['title']) : ''; ?>">
+        <button type="submit" class="enter-searching-btn">Search</button>
+            </div>
 
-            <select name="location">
-              <option>Work Location</option>
-              <option>Remote</option>
-              <option>On-site</option>
-            </select>
+            <div class="filter-bar">
+              <select name="position">
+                <option value="">Select Position</option>
+                <option value="Designer" <?php if (isset($_GET['position']) && $_GET['position'] == 'Designer') echo 'selected'; ?>>Designer</option>
+                <option value="Developer" <?php if (isset($_GET['position']) && $_GET['position'] == 'Developer') echo 'selected'; ?>>Developer</option>
+                <option value="Product Manager" <?php if (isset($_GET['position']) && $_GET['position'] == 'Product Manager') echo 'selected'; ?>>Product Manager</option>
+              </select>
 
-            <select name="experience">
-              <option>Experience</option>
-              <option>Junior</option>
-              <option>Middle</option>
-              <option>Senior</option>
-            </select>
+              <select name="type">
+                <option value="">Work Type</option>
+                <option value="Remote" <?php if (isset($_GET['type']) && $_GET['type'] == 'Remote') echo 'selected'; ?>>Remote</option>
+                <option value="OnSite" <?php if (isset($_GET['type']) && $_GET['type'] == 'OnSite') echo 'selected'; ?>>On-site</option>
+              </select>
 
-            <select name="perMonth">
-              <option>Per month</option>
-              <option>Per hour</option>
-              <option>Per day</option>
-            </select>
+              <select name="experience">
+                <option value="">Experience Level</option>
+                <option value="Junior" <?php if (isset($_GET['experience']) && $_GET['experience'] == 'Junior') echo 'selected'; ?>>Junior</option>
+                <option value="Middle" <?php if (isset($_GET['experience']) && $_GET['experience'] == 'Middle') echo 'selected'; ?>>Middle</option>
+                <option value="Senior" <?php if (isset($_GET['experience']) && $_GET['experience'] == 'Senior') echo 'selected'; ?>>Senior</option>
+              </select>
 
-            <div class="salary-range">
-              <label for="salaryRange">Salary range</label>
-              <input type="range" id="salaryRange" min="1200" max="20000" value="5000" />
+              <select name="per">
+                <option value="">Salary Basis</option>
+                <option value="month" <?php if (isset($_GET['per']) && $_GET['per'] == 'month') echo 'selected'; ?>>Per month</option>
+                <option value="hour" <?php if (isset($_GET['per']) && $_GET['per'] == 'hour') echo 'selected'; ?>>Per hour</option>
+                <option value="day" <?php if (isset($_GET['per']) && $_GET['per'] == 'day') echo 'selected'; ?>>Per day</option>
+              </select>
             </div>
           </div>
-        </div>
+        </form>
         <h1>Current Openings</h1>
 
         <?php
