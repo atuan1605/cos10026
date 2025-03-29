@@ -113,7 +113,7 @@ $jobs = [
         "experience" => "Junior",
         "essential" => ["Proficient in Node.js and Express", "Understanding of databases (SQL/NoSQL)"],
         "preferable" => ["Experience with Docker", "Knowledge of cloud services"],
-        "logo_image" => "cloudnet_logo.png",
+        "logo_image" => "./styles/images/cloud.png",
         "working_schedule" => "Part time",
         "employment_types" => ["Shift method", "Flexible schedule"]
     ],
@@ -137,7 +137,7 @@ $jobs = [
         "experience" => "Middle",
         "essential" => ["Familiarity with Flutter and Dart", "Understanding of mobile app lifecycle"],
         "preferable" => ["Experience with Firebase", "Basic knowledge of native Android/iOS"],
-        "logo_image" => "appify_logo.png",
+        "logo_image" => "./styles/images/applify.png",
         "working_schedule" => "Internship",
         "employment_types" => ["Shift work", "Flexible schedule"]
     ],
@@ -161,7 +161,7 @@ $jobs = [
         "experience" => "Middle",
         "essential" => ["Proficiency in SQL and Python", "Experience with data visualization tools"],
         "preferable" => ["Machine learning knowledge", "Strong presentation skills"],
-        "logo_image" => "dataworks_logo.png",
+        "logo_image" => "./styles/images/data.png",
         "working_schedule" => "Project work",
         "employment_types" => ["Full day", "Distant work"]
     ],
@@ -185,7 +185,7 @@ $jobs = [
         "experience" => "Senior",
         "essential" => ["Experience with SIEM tools", "Understanding of network protocols"],
         "preferable" => ["Cybersecurity certifications (e.g., CISSP, CEH)", "Knowledge of threat intelligence"],
-        "logo_image" => "cybersec_logo.png",
+        "logo_image" => "./styles/images/cyber.png",
         "working_schedule" => "Full Time",
         "employment_types" => ["Full day", "Distant work"]
     ]
@@ -240,3 +240,4 @@ foreach ($jobs as $job) {
 
 $stmt->close();
 $conn->close();
+?>
