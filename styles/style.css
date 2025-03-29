@@ -42,7 +42,6 @@ header {
   font-size: 1.3rem;
   font-weight: bold;
 }
-
 nav ul {
   display: flex;
   gap: 1.5rem;
@@ -142,6 +141,7 @@ nav a:hover {
 /* Search bar + filters row */
 .filter-container {
   width: 100%;
+  flex:1;
   font-size: small;
   gap: 1rem;
   border-radius: 8px;
@@ -162,6 +162,7 @@ nav a:hover {
 }
 .searching-bar {
   display: flex;
+  flex:1;
   align-items: center;
   padding: 0.3rem 1rem;
 }
@@ -674,8 +675,8 @@ select:valid {
 
 #intro-logo {
   margin: auto;
-  width: 270px;
-  height: 150px;
+  width: 250px;
+  height: 100px;
   background-size: cover;
   background-repeat: no-repeat;
   animation: floatUpDown 3s ease-in-out infinite;
@@ -834,7 +835,7 @@ select:valid {
   color: white;
   text-decoration: none;
   font-size: 24px;
-  padding: 10px 15px;
+  padding: 10px 17px;
   border-radius: 50%;
 }
 
@@ -889,6 +890,7 @@ select:valid {
 /*--NINH'S*/
 .content-job-area {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-items: center;
@@ -902,10 +904,16 @@ select:valid {
 
 .content-job-area article {
   width: 100%;
+  flex: 1;
   border-radius: 10px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
   color: #242424;
   background-color: white;
+}
+
+.no-results {
+  width: 100%;
+  flex: 1;
 }
 
 .content-job-area button {
@@ -1022,6 +1030,7 @@ select:valid {
 
 .job-right-content {
   font-size: small;
+  flex:0.5;
   padding: 1rem;
   display: flex;
   width: 250px;
