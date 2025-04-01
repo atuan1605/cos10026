@@ -185,7 +185,6 @@
         if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
         ?>
-            <h1>Current Openings</h1>
             <article>
               <div class="job-title">
                 <h2 id="job-name"><?php echo htmlspecialchars($row['title']); ?></h2>

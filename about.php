@@ -16,26 +16,52 @@
 <body>
   <!-- MAIN CONTENT -->
   <div class="main-content" style="flex-direction: column;">
-
-    <section id="section_head" style="border-radius: 8px; padding: 1rem; min-height: 240px;">
-      <div class="section_left">
-        <div id="section_left_title">
-          <h1 id="our_group">Our Group</h1>
-          <h2 id="group_name">LuckyJob Warriors</h2>
+    <div class="test-about">
+       <div class="animation01">
+        <div class="rhombus_small">
+            <div class="rhombus">
+                <div class="border_box">
+                    <span class="line line01"></span>
+                    <span class="line line02"></span>
+                    <span class="line line03"></span>
+                    <span class="line line04"></span>
+                    <span class="circle circle01"></span>
+                    <span class="circle circle02"></span>
+                    <span class="circle circle03"></span>
+                    <span class="circle circle04"></span>
+                    <span class="animation_line animation_line01"></span>
+                    <span class="animation_line_wrapper animation_line02_wrapper"><span class="animation_line animation_line02"></span></span>
+                    <span class="animation_line animation_line03"></span>
+                    <span class="animation_line_wrapper animation_line04_wrapper"><span class="animation_line animation_line04"></span></span>
+                    <span class="animation_line animation_line05"></span>
+                    <span class="animation_line_wrapper animation_line06_wrapper"><span class="animation_line animation_line06"></span></span>
+                    <span class="animation_line animation_line07"></span>
+                    <span class="animation_line_wrapper animation_line08_wrapper"><span class="animation_line animation_line08"></span></span>
+                </div>
+                <div class="wave">
+                    <div class="wave_wrapper"><div class="wave_box"></div></div>
+                </div>
+            </div>
         </div>
-        <div id="small_des">
-          <p>Tutor: Mr.Binh </p>
-          <p>Group ID: 06</p>
+    </div>
+    <div class="animation02">
+        <div class="rhombus_box">
+            <span class="rhombus_item_wrapper rhombus_item01_wrapper"><span class="rhombus_item"></span></span>
+            <span class="rhombus_item_wrapper rhombus_item02_wrapper"><span class="rhombus_item"></span></span>
         </div>
-      </div>
-
-      <div class="section_group_picture" style="min-width: 300px;">
-        <figure style="float: right; text-align: center;">
-          <img src="/styles/images/logo_minh.avif" alt="Our team photo" style="max-width: 200px; border: 1px solid #7a7979;" />
-          <figcaption style="font-weight: 500; font-family: Fondamento, serif; font-size: 19px;">LuckyJob Warriors Team</figcaption>
-        </figure>
-      </div>
-    </section>
+        <div class="double_content">
+            <div class="double_wrapper02 dotted02"><div class="dotted_hide"><div class="double_wrapper01 dotted01"><span class="dotted_right"></span></div></div></div>
+            <div class="double_wrapper02 white02"><div class="double_wrapper01 white01"></div></div>
+            <div class="double_wrapper02 gray02"><div class="double_wrapper01 gray01"></div></div>
+            <div class="double_wrapper02 orange02"><div class="double_wrapper01 orange01"></div></div>
+        </div>
+        <div class="name">
+            <p>Group 6</p>
+            <span class="name_circle01"></span>
+            <span class="name_circle02"></span>
+        </div>
+    </div>
+    </div>
 
     <!-- Genneral Introduction -->
     <section class="background-section" style="border-radius: 8px; padding: 1rem; margin-top: 1rem;">
@@ -98,7 +124,10 @@
       <?php if (!empty($members)): ?>
         <?php foreach ($members as $member): ?>
           <div class="info_member">
-            <img class="member-photo" src="<?= htmlspecialchars($member["image"]) ?>" alt="<?= htmlspecialchars($member["name"]) ?>">
+             <?php
+        $imageSrc = !empty($member["image"]) ? $member["image"] : 'styles/images/default.png';
+        ?>
+        <img class="member-photo" src="<?= htmlspecialchars($imageSrc) ?>" alt="<?= htmlspecialchars($member["name"]) ?>">
             <div class="info_member_desc">
               <ul class="desc_details">
                 <li>
