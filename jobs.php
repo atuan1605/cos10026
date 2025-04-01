@@ -48,11 +48,9 @@
               <?php if (!empty($_GET['employment_type']) && in_array("Shift method", $_GET['employment_type'])) echo "checked"; ?>> Shift method</label>
         </div>
     </aside>
-
     <!-- JOB DESCRIPTIONS -->
     <section class="content-job-area">
       <h1>Current Openings</h1>
-
       <?php
       require_once './db/settings.php'; // Import database connection settings
 
@@ -73,19 +71,15 @@
       // Corrected Employment Type filter
       if (!empty($_GET['employment_type'])) {
         $employment_types = array_map([$conn, 'real_escape_string'], $_GET['employment_type']);
-        $sql .= " AND (";
-        $conditions = [];
-        foreach ($employment_types as $type) {
-          $conditions[] = "employment_types LIKE '%$type%'";
-        }
-        $sql .= implode(" OR ", $conditions) . ")";
+        $sql .= " AND (" . implode(" OR ", array_map(fn($type) => "employment_types LIKE '%$type%'", $employment_types)) . ")";
       }
 
       // Xử lý tìm kiếm theo từ khóa
       if (!empty($_GET['title'])) {
-        $title = "%" . trim($_GET['title']) . "%"; // Thêm % cho LIKE
-        $sql .= " AND (title LIKE ? OR description LIKE ?)";
-    }
+        $title = $conn->real_escape_string(trim($_GET['title'])) . "%";
+        $sql .= " AND (title LIKE '$title')";
+      }
+
       // Lọc theo vị trí công việc
       if (!empty($_GET['position'])) {
         $position = $conn->real_escape_string($_GET['position']);
@@ -112,6 +106,31 @@
 
       // Execute Filtered Query
       $result = $conn->query($sql);
+
+      // Fix: Remove duplicate MySQL connection
+      $search = isset($_POST['search']) ? trim($_POST['search']) : '';
+
+      if (!empty($search)) {
+        // Convert search term to lowercase and sanitize input
+        $search = strtolower(trim($search));
+        $search = $conn->real_escape_string($search);
+
+        // Ensure that the search only matches the start of job titles
+        $sql = "SELECT * FROM jobs WHERE job_title LIKE '$search%' ORDER BY job_title ASC";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+            echo "<p>" . htmlspecialchars($row['job_title']) . "</p>";
+          }
+        } else {
+      ?>
+          echo '<div class="no-results">
+            <p>No results found</p>
+          </div>';
+      <?php
+        }
+      }
+      $conn->close();
       ?>
 
       <!-- JOB DESCRIPTIONS -->
@@ -119,10 +138,10 @@
         <form method="GET" action="">
           <div class="filter-container">
             <div class="searching-bar">
-            <input type="text" name="title" id="searching-space"
-             placeholder="Search here..."
-             value="<?php echo isset($_GET['title']) ? htmlspecialchars($_GET['title']) : ''; ?>">
-        <button type="submit" class="enter-searching-btn">Search</button>
+              <input type="text" name="title" id="searching-space"
+                placeholder="Search here..."
+                value="<?php echo isset($_GET['title']) ? htmlspecialchars($_GET['title']) : ''; ?>">
+              <button type="submit" class="enter-searching-btn">Search</button>
             </div>
 
             <div class="filter-bar">
@@ -155,23 +174,18 @@
             </div>
           </div>
         </form>
-        <h1>Current Openings</h1>
-
         <?php
-        require_once './db/settings.php'; // Import kết nối database
-
+        require_once './db/settings.php';
         $conn = new mysqli($host, $user, $pwd, $sql_db);
         if ($conn->connect_error) {
           die("Connection failed: " . $conn->connect_error);
         }
-
-        // Lấy danh sách công việc từ database
-        // Giả sử bảng lưu job là `jobs`
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
         ?>
+            <h1>Current Openings</h1>
             <article>
               <div class="job-title">
                 <h2 id="job-name"><?php echo htmlspecialchars($row['title']); ?></h2>
@@ -228,7 +242,22 @@
                           }
                           ?>
                         </ul>
+
+                      <li>Employment Type:
+                        <ul>
+                          <?php
+                          $employment_types = json_decode($row['employment_types'], true); // Decode JSON to array
+                          if (is_array($employment_types)) {
+                            foreach ($employment_types as $employment_types) {
+                              echo "<li>" . htmlspecialchars($employment_types) . "</li>";
+                            }
+                          } else {
+                            echo "<li>No employment types requirements listed.</li>";
+                          }
+                          ?>
+                        </ul>
                       </li>
+
                     </ol>
                   </div>
                 </div>
@@ -238,6 +267,7 @@
                     <p><strong>Reference No.:</strong> <?php echo htmlspecialchars($row['job_reference_number']); ?></p>
                     <p><strong>Title:</strong> <?php echo htmlspecialchars($row['title']); ?></p>
                     <p><strong>Salary Range:</strong> $<?php echo htmlspecialchars($row['salary_range']); ?> per <?php echo htmlspecialchars($row['per']); ?></p>
+                    <p><strong>Schedule:</strong> <?php echo htmlspecialchars($row['working_schedule']); ?></p>
                     <p><strong>Reports to:</strong> <?php echo htmlspecialchars($row['report_to']); ?></p>
                   </div>
                   <div class="other-info">
