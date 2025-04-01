@@ -7,7 +7,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle login
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
@@ -20,16 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result && $user = $result->fetch_assoc()) {
         if (password_verify($password, $user['password'])) {
             $_SESSION['user'] = [
+                'id' => $user['id'],
                 'username' => $user['username'],
                 'role' => $user['role'],
-                'avatar' => $user['image'] ?? './styles/images/avatar.png'
+                'avatar' => !empty($user['image']) ? $user['image'] : './styles/images/avatar.png'
             ];
             header("Location: index.php");
             exit();
         }
     }
 
-    $_SESSION['snackbar'] = 'Incorrect username or password!';
+    $_SESSION['snackbarMessage'] = 'Incorrect username or password!';
+    $_SESSION['snackbarType'] = 'error';
     header("Location: signin.php");
     exit();
 }
@@ -56,19 +57,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input type="password" name="password" placeholder="Password" required>
     </div>
     <div class="forgot">
-      <a href="#">Forgot password?</a>
+      <a href="register.php">Don't have an account? Register here</a>
     </div>
     <button type="submit" class="btn-login">Sign In</button>
   </form>
+
+  <div class="back-home">
+    <a href="index.php">&larr; Back to homepage</a>
+  </div>
 </div>
 
 <?php
-if (isset($_SESSION['snackbar'])) {
-    $snackbar = $_SESSION['snackbar'];
-    unset($_SESSION['snackbar']);
-    include 'snackbar.php';
+if (isset($_SESSION['snackbarMessage'])) {
+    $snackbarMessage = $_SESSION['snackbarMessage'];
+    $snackbarType = $_SESSION['snackbarType'] ?? 'error';
+    unset($_SESSION['snackbarMessage'], $_SESSION['snackbarType']);
+    echo "<div class='snackbar {$snackbarType}'>" . htmlspecialchars($snackbarMessage) . "</div>";
 }
 ?>
-
 </body>
 </html>

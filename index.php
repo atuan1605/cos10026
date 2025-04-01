@@ -30,6 +30,7 @@
 
   </div>
   <!-- Section 2: Key features -->
+   
   <?php
   include 'companyTitleInfo.php';
   $reasonCount = count($reasons);

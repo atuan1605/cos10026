@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+$jobRef = $_GET['job_reference_number'] ?? '';
+
+if (empty($jobRef)) {
+    $_SESSION['snackbarMessage'] = 'Please select a job to access the apply form';
+    header('Location: jobs.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,25 +18,22 @@
 </head>
 <body>
 
-  <!-- HEADER & NAV -->
   <?php include 'header.php';?>
-  <!-- MAIN CONTENT -->
+
   <div class="main-content" style="flex-direction: column;">
     <h1 id="applyHeader">Job Application Form</h1>
     <section class="applyForm">
-      <form
-        action="https://mercury.swin.edu.au/it000000/formtest.php"
-        method="post"
-      >
+      <form action="process_eoi.php" method="post" novalidate>
         <label for="refNo">Job Reference Number:</label><br>
         <input
           type="text"
           id="refNo"
           name="jobRef"
+          value="<?php echo htmlspecialchars($jobRef); ?>"
           pattern="[A-Za-z0-9]{5}"
           maxlength="5"
-          placeholder="e.g. DEV01"
           required
+          readonly
         >
         <br><br>
 
@@ -58,8 +66,6 @@
           type="date"
           id="dob"
           name="dob"
-          placeholder="e.g. 15/08/2000"
-          pattern="\\d{1,2}/\\d{1,2}/\\d{4}"
           required
         >
         <br><br>
@@ -77,7 +83,7 @@
           id="address"
           name="address"
           maxlength="40"
-          placeholder="e.g. Room 706, Building Keangnam, Nam Trung Yen Ur"
+          placeholder="e.g. Room 706, Building Keangnam, Nam Trung Yen"
           required
         >
         <br><br>
@@ -123,7 +129,6 @@
           type="email"
           id="email"
           name="email"
-          pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"
           placeholder="e.g. nguyenvana@gmail.com"
           required
         >
@@ -142,10 +147,10 @@
 
         <fieldset>
           <legend>Skills</legend>
-          <label><input type="checkbox" name="skills" value="HTML" checked> HTML</label>
-          <label><input type="checkbox" name="skills" value="CSS" checked> CSS</label>
-          <label><input type="checkbox" name="skills" value="JS" checked> JavaScript</label>
-          <label><input type="checkbox" name="skills" value="Other"> Other skills...</label>
+          <label><input type="checkbox" name="skills[]" value="HTML"> HTML</label>
+          <label><input type="checkbox" name="skills[]" value="CSS"> CSS</label>
+          <label><input type="checkbox" name="skills[]" value="JS"> JavaScript</label>
+          <label><input type="checkbox" name="skills[]" value="Other"> Other skills...</label>
         </fieldset>
         <br>
 
@@ -155,10 +160,10 @@
 
         <button type="submit">Apply</button>
         <button type="reset" class="reset-btn">Reset</button>
-
       </form>
     </section>
   </div>
+
   <?php include 'footer.php';?>
 </body>
 </html>

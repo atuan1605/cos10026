@@ -274,7 +274,9 @@
                     <h3>Other Information:</h3>
                     <p><strong><?php echo htmlspecialchars($row['total']); ?>+</strong> hiring people, <strong><?php echo htmlspecialchars($row['available_position']); ?></strong> is active</p>
                   </div>
-                  <a href="apply.html"> <button>Apply</button> </a>
+                  <a href="apply.php?job_reference_number=<?php echo urlencode($row['job_reference_number']); ?>">
+                    <button type="button">Apply</button>
+                  </a>
                 </div>
               </div>
             </article>
@@ -288,6 +290,8 @@
       </section>
   </div>
   <?php include 'footer.php'; ?>
+
+
 </body>
 
 </html>
