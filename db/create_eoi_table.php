@@ -28,7 +28,7 @@ if ($tableCheckResult && $tableCheckResult->num_rows > 0) {
         phone VARCHAR(20) NOT NULL,
         skills TEXT NOT NULL,
         other_skills TEXT,
-        status ENUM('New','In Progress','Finalised') DEFAULT 'New',
+        status ENUM('New','Approved','Rejected') DEFAULT 'New',
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
