@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eoi_id'], $_POST['act
     $eoi_id = intval($_POST['eoi_id']);
     $action = $_POST['action'];
 
-    $getInfo = $conn->prepare("SELECT e.user_id, e.job_reference_number, j.available_position FROM eoi e JOIN jobs j ON e.job_reference_number = j.job_reference_number WHERE e.id = ?");
+    $getInfo = $conn->prepare("SELECT e.user_id, e.job_reference_number, j.available_position, e.status FROM eoi e JOIN jobs j ON e.job_reference_number = j.job_reference_number WHERE e.id = ?");
     $getInfo->bind_param("i", $eoi_id);
     $getInfo->execute();
     $infoResult = $getInfo->get_result();
@@ -26,8 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eoi_id'], $_POST['act
         $user_id = $info['user_id'];
         $jobRef = $info['job_reference_number'];
         $available = (int)$info['available_position'];
+        $status = $info['status'];
 
-        if ($action === 'approve' && $available > 0) {
+        if ($action === 'approve' && $available > 0 && $status !== 'Approved') {
             // Update EOI status to approved
             $conn->query("UPDATE eoi SET status = 'Approved' WHERE id = $eoi_id");
 
@@ -36,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eoi_id'], $_POST['act
 
             // Decrease available positions for the job
             $conn->query("UPDATE jobs SET available_position = available_position - 1 WHERE job_reference_number = '$jobRef'");
-        } elseif ($action === 'reject') {
+        } elseif ($action === 'reject' && $status !== 'Rejected') {
             // Update EOI status to rejected
             $conn->query("UPDATE eoi SET status = 'Rejected' WHERE id = $eoi_id");
         } elseif ($action === 'delete') {
@@ -52,7 +53,7 @@ $searchTerm = trim($_GET['search'] ?? '');
 $validFields = ['job_reference_number', 'first_name', 'last_name', 'email'];
 if (!in_array($searchBy, $validFields)) $searchBy = 'job_reference_number';
 
-$sql = "SELECT e.*, u.username, j.available_position FROM eoi e
+$sql = "SELECT e.*, u.username, j.available_position, u.role FROM eoi e
         JOIN users u ON e.user_id = u.id
         JOIN jobs j ON e.job_reference_number = j.job_reference_number
         WHERE e.$searchBy LIKE ?";
@@ -87,6 +88,7 @@ $results = $stmt->get_result();
   </form>
 
   <?php if ($results->num_rows > 0): ?>
+    <div class="table-wrapper">
     <table class="manage-table">
       <thead>
         <tr>
@@ -113,7 +115,11 @@ $results = $stmt->get_result();
             <td><?= htmlspecialchars($row['created_at'] ?? 'N/A') ?></td>
             <td><?= (int)$row['available_position'] ?></td>
             <td class="action-buttons">
-              <?php if ((int)$row['available_position'] > 0): ?>
+                <?php if ((int)$row['available_position'] <= 0): ?>
+                    <div style="color: red;">Job full</div>
+                <?php elseif ($row['role'] === 'Member'): ?>
+                    <span style="color: green;">Is Member</span>
+                <?php elseif ($row['status'] !== 'Approved'): ?>
                 <form method="POST" action="manage.php" style="display:inline;">
                   <input type="hidden" name="eoi_id" value="<?= $row['id'] ?>">
                   <input type="hidden" name="action" value="approve">
@@ -130,14 +136,12 @@ $results = $stmt->get_result();
                 <input type="hidden" name="action" value="delete">
                 <button type="submit" class="btn-delete manage-btn">Delete</button>
               </form>
-              <?php if ((int)$row['available_position'] <= 0): ?>
-                <div style="font-size: 0.85rem; color: red;">Job full</div>
-              <?php endif; ?>
             </td>
           </tr>
         <?php endwhile; ?>
       </tbody>
     </table>
+    </div>
   <?php else: ?>
     <div class="no-results">No EOIs found.</div>
   <?php endif; ?>
