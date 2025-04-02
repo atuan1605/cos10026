@@ -56,7 +56,14 @@ if (!in_array($searchBy, $validFields)) $searchBy = 'job_reference_number';
 $sql = "SELECT e.*, u.username, j.available_position, u.role FROM eoi e
         JOIN users u ON e.user_id = u.id
         JOIN jobs j ON e.job_reference_number = j.job_reference_number
-        WHERE e.$searchBy LIKE ?";
+        WHERE e.$searchBy LIKE ?
+        ORDER BY
+          CASE e.status
+            WHEN 'New' THEN 0
+            WHEN 'Approved' THEN 1
+            WHEN 'Rejected' THEN 2
+            ELSE 3
+          END";
 $stmt = $conn->prepare($sql);
 $likeTerm = "%$searchTerm%";
 $stmt->bind_param("s", $likeTerm);
@@ -73,7 +80,16 @@ $results = $stmt->get_result();
 </head>
 <?php include 'header.php'; ?>
 
+<?php
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
+
+
 <div class="manage-container">
+  <div class="tab-navigation">
+  <a href="manage.php" class="<?= $currentPage == 'manage.php' ? 'active-tab' : '' ?>">EOI</a>
+  <a href="manageJobs.php" class="<?= $currentPage == 'manageJobs.php' ? 'active-tab' : '' ?>">Job</a>
+</div>
   <h1>Manage EOIs</h1>
 
   <form class="manage-form" method="GET" action="manage.php">
@@ -131,7 +147,7 @@ $results = $stmt->get_result();
                   <button type="submit" class="btn-reject manage-btn">Reject</button>
                 </form>
               <?php endif; ?>
-              <form method="POST" action="manage.php" style="display:inline;">
+              <form method="POST" action="manage.php" onsubmit="return confirm('Are you sure you want to delete this EOI?');" style="display:inline;">
                 <input type="hidden" name="eoi_id" value="<?= $row['id'] ?>">
                 <input type="hidden" name="action" value="delete">
                 <button type="submit" class="btn-delete manage-btn">Delete</button>

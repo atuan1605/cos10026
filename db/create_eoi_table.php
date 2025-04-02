@@ -15,6 +15,7 @@ if ($tableCheckResult && $tableCheckResult->num_rows > 0) {
     $createTableSQL = "CREATE TABLE eoi (
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         job_reference_number VARCHAR(5) NOT NULL,
         first_name VARCHAR(20) NOT NULL,
         last_name VARCHAR(20) NOT NULL,
