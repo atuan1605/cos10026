@@ -3,7 +3,26 @@ session_start();
 require_once './db/settings.php';
 
 if (!isset($_SESSION['user'])) {
-    die("<div class='response error'><h2>Access Denied</h2><p>You must be logged in to apply.</p></div>");
+   echo <<<HTML
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Access Denied</title>
+      <link rel="stylesheet" href="./styles/style.css" />
+    </head>
+    <body>
+      <div class="response-container">
+        <div class="response error">
+          <h2>Access Denied</h2>
+          <p>You must be logged in to apply for a job.</p>
+          <a href="login.php"><button>Login</button></a>
+        </div>
+      </div>
+    </body>
+    </html>
+    HTML;
+    exit();
 }
 
 $currentUser = $_SESSION['user'];
