@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once './db/settings.php';
 
 if (!isset($_SESSION['user'])) {
@@ -52,13 +54,6 @@ if (in_array($userRole, ['Admin', 'Member'])) {
     exit();
 }
 
-function isValidDOB($dob) {
-    $birthDate = DateTime::createFromFormat('Y-m-d', $dob);
-    if (!$birthDate) return false;
-    $today = new DateTime();
-    $age = $today->diff($birthDate)->y;
-    return $age >= 15 && $age <= 80;
-}
 
 $jobRef = $_POST['jobRef'] ?? '';
 $firstName = trim($_POST['firstName'] ?? '');

@@ -34,7 +34,7 @@ if ($tableCheckResult && $tableCheckResult->num_rows === 0) {
         preferable TEXT,
         logo_image TEXT,
         working_schedule ENUM('Full time', 'Part time', 'Internship', 'Project work', 'Volunteering') DEFAULT NULL,
-        employment_types TEXT 
+        employment_types TEXT
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
     if (!$conn->query($createTableSQL)) {
@@ -123,7 +123,7 @@ $jobs = [
         "title" => "Mobile App Developer",
         "position" => "Developer",
         "per" => "day",
-        "job_reference_number" => "MOB202",
+        "job_reference_number" => "MO202",
         "address" => "101 App Street",
         "salary_range" => "800-1500",
         'date' => '05 August, 2023',
@@ -210,7 +210,7 @@ foreach ($jobs as $job) {
     $preferable_json = json_encode($job['preferable']);
     $employment_types_json = json_encode($job['employment_types']);
 
-  
+
     $stmt->bind_param(
         "sssssssssssiisssssss",
         $job['company_name'],

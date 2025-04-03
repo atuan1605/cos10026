@@ -566,11 +566,13 @@ select option {
 
 #state {
   height: 40px;
+  width: 200px;
 }
 
 label {
   font-weight: 600;
 }
+
 
 nav a {
   color: white;
@@ -580,12 +582,9 @@ nav a.active {
   color: rgb(121, 248, 255);
 }
 
-
-input:valid,
-select:valid {
-  border: 2px solid green;
+#error-message {
+  margin-bottom: 20px;
 }
-
 /* ----- RESPONSIVE ----- */
 @media (max-width: 768px) {
   .main-content {
@@ -880,10 +879,6 @@ select:valid {
     padding-left: 1rem;
   }
 }
-
-
-
-
 
 /*--NINH'S*/
 .content-job-area {
