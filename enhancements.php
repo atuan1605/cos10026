@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,9 +12,18 @@
 <body  class="homepage">
   <!-- HEADER & NAV -->
   <?php include 'header.php';?>
+
+<?php
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
   <!-- MAIN CONTENT -->
   <div class="main-content">
+
     <section class="enhancements">
+        <div class="tab-navigation">
+    <a href="enhancements.php" class="<?= $currentPage == 'enhancements.php' ? 'active-tab' : '' ?>">Part 1</a>
+    <a href="enhancements_part2.php" class="<?= $currentPage == 'enhancements_part2.php' ? 'active-tab' : '' ?>">Part 2</a>
+    </div>
       <h1>Website Enhancements</h1>
       <p>This page describes the advanced features added to enhance the usability, interactivity, and responsiveness of
         the LuckyJob website.</p>

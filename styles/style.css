@@ -3227,3 +3227,16 @@ orange circle
 .job-form-actions .btn-reset:hover {
   background-color: #e0a800;
 }
+
+.enhancement-image {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.enhancement-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

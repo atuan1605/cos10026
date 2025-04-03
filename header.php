@@ -15,7 +15,7 @@ if (session_status() === PHP_SESSION_NONE) {
           <li><a href="jobs.php" class="<?= basename($_SERVER['PHP_SELF']) == 'jobs.php' ? 'active' : '' ?>">Jobs</a></li>
           <li><a href="<?= $_SERVER['PHP_SELF']; ?>?error=apply-disabled" style="opacity: 0.5;">Apply</a></li>
           <li><a href="about.php" class="<?= basename($_SERVER['PHP_SELF']) == 'about.php' ? 'active' : '' ?>">About</a></li>
-          <li><a href="enhancements.php" class="<?= basename($_SERVER['PHP_SELF']) == 'enhancements.php' ? 'active' : '' ?>">Enhancements</a></li>
+          <li><a href="enhancements_part2.php" class="<?= basename($_SERVER['PHP_SELF']) == 'enhancements.php' ? 'active' : '' ?>">Enhancements</a></li>
           <li><a href="mailto:105313596@student.swin.edu.au">Email</a></li>
 
           <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'Admin'): ?>
