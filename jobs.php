@@ -74,31 +74,31 @@
         $sql .= " AND (" . implode(" OR ", array_map(fn($type) => "employment_types LIKE '%$type%'", $employment_types)) . ")";
       }
 
-      // Xử lý tìm kiếm theo từ khóa
+      
       if (!empty($_GET['title'])) {
         $title = $conn->real_escape_string(trim($_GET['title'])) . "%";
         $sql .= " AND (title LIKE '$title')";
       }
 
-      // Lọc theo vị trí công việc
+      
       if (!empty($_GET['position'])) {
         $position = $conn->real_escape_string($_GET['position']);
         $sql .= " AND position = '$position'";
       }
 
-      // Lọc theo địa điểm làm việc
+     
       if (!empty($_GET['type'])) {
         $type = $conn->real_escape_string($_GET['type']);
         $sql .= " AND type = '$type'";
       }
 
-      // Lọc theo kinh nghiệm
+   
       if (!empty($_GET['experience'])) {
         $experience = $conn->real_escape_string($_GET['experience']);
         $sql .= " AND experience = '$experience'";
       }
 
-      // Lọc theo hình thức trả lương
+   
       if (!empty($_GET['per'])) {
         $per = $conn->real_escape_string($_GET['per']);
         $sql .= " AND per = '$per'";
