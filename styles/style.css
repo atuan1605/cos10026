@@ -476,6 +476,10 @@ button[type="submit"]:hover {
   letter-spacing: 2px;
   text-align: center;
 }
+#container-member-photo {
+  display: flex;
+  justify-content: center;
+}
 
 #small_des {
   display: flex;
@@ -1253,6 +1257,7 @@ a {
   }
 
   .info_member {
+    display: flex;
     flex-direction: column !important;
     font-size: small;
   }
@@ -1265,6 +1270,9 @@ a {
   .members,
   .member-list {
     grid-template-columns: 1fr !important;
+  }
+  .member-photo {
+    justify-content: center !important;
   }
 
   .desc_details ul {

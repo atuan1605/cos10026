@@ -10,57 +10,69 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dosis:wght@200..800&family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
   <!-- HEADER & NAV -->
-  <?php include 'header.php';?>
+  <?php include 'header.php'; ?>
 </head>
 
 <body>
   <!-- MAIN CONTENT -->
   <div class="main-content" style="flex-direction: column;">
     <div class="test-about">
-       <div class="animation01">
+      <div class="animation01">
         <div class="rhombus_small">
-            <div class="rhombus">
-                <div class="border_box">
-                    <span class="line line01"></span>
-                    <span class="line line02"></span>
-                    <span class="line line03"></span>
-                    <span class="line line04"></span>
-                    <span class="circle circle01"></span>
-                    <span class="circle circle02"></span>
-                    <span class="circle circle03"></span>
-                    <span class="circle circle04"></span>
-                    <span class="animation_line animation_line01"></span>
-                    <span class="animation_line_wrapper animation_line02_wrapper"><span class="animation_line animation_line02"></span></span>
-                    <span class="animation_line animation_line03"></span>
-                    <span class="animation_line_wrapper animation_line04_wrapper"><span class="animation_line animation_line04"></span></span>
-                    <span class="animation_line animation_line05"></span>
-                    <span class="animation_line_wrapper animation_line06_wrapper"><span class="animation_line animation_line06"></span></span>
-                    <span class="animation_line animation_line07"></span>
-                    <span class="animation_line_wrapper animation_line08_wrapper"><span class="animation_line animation_line08"></span></span>
-                </div>
-                <div class="wave">
-                    <div class="wave_wrapper"><div class="wave_box"></div></div>
-                </div>
+          <div class="rhombus">
+            <div class="border_box">
+              <span class="line line01"></span>
+              <span class="line line02"></span>
+              <span class="line line03"></span>
+              <span class="line line04"></span>
+              <span class="circle circle01"></span>
+              <span class="circle circle02"></span>
+              <span class="circle circle03"></span>
+              <span class="circle circle04"></span>
+              <span class="animation_line animation_line01"></span>
+              <span class="animation_line_wrapper animation_line02_wrapper"><span class="animation_line animation_line02"></span></span>
+              <span class="animation_line animation_line03"></span>
+              <span class="animation_line_wrapper animation_line04_wrapper"><span class="animation_line animation_line04"></span></span>
+              <span class="animation_line animation_line05"></span>
+              <span class="animation_line_wrapper animation_line06_wrapper"><span class="animation_line animation_line06"></span></span>
+              <span class="animation_line animation_line07"></span>
+              <span class="animation_line_wrapper animation_line08_wrapper"><span class="animation_line animation_line08"></span></span>
             </div>
+            <div class="wave">
+              <div class="wave_wrapper">
+                <div class="wave_box"></div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="animation02">
+      </div>
+      <div class="animation02">
         <div class="rhombus_box">
-            <span class="rhombus_item_wrapper rhombus_item01_wrapper"><span class="rhombus_item"></span></span>
-            <span class="rhombus_item_wrapper rhombus_item02_wrapper"><span class="rhombus_item"></span></span>
+          <span class="rhombus_item_wrapper rhombus_item01_wrapper"><span class="rhombus_item"></span></span>
+          <span class="rhombus_item_wrapper rhombus_item02_wrapper"><span class="rhombus_item"></span></span>
         </div>
         <div class="double_content">
-            <div class="double_wrapper02 dotted02"><div class="dotted_hide"><div class="double_wrapper01 dotted01"><span class="dotted_right"></span></div></div></div>
-            <div class="double_wrapper02 white02"><div class="double_wrapper01 white01"></div></div>
-            <div class="double_wrapper02 gray02"><div class="double_wrapper01 gray01"></div></div>
-            <div class="double_wrapper02 orange02"><div class="double_wrapper01 orange01"></div></div>
+          <div class="double_wrapper02 dotted02">
+            <div class="dotted_hide">
+              <div class="double_wrapper01 dotted01"><span class="dotted_right"></span></div>
+            </div>
+          </div>
+          <div class="double_wrapper02 white02">
+            <div class="double_wrapper01 white01"></div>
+          </div>
+          <div class="double_wrapper02 gray02">
+            <div class="double_wrapper01 gray01"></div>
+          </div>
+          <div class="double_wrapper02 orange02">
+            <div class="double_wrapper01 orange01"></div>
+          </div>
         </div>
         <div class="name">
-            <p>Group 6</p>
-            <span class="name_circle01"></span>
-            <span class="name_circle02"></span>
+          <p>Group 6</p>
+          <span class="name_circle01"></span>
+          <span class="name_circle02"></span>
         </div>
-    </div>
+      </div>
     </div>
 
     <!-- Genneral Introduction -->
@@ -124,10 +136,12 @@
       <?php if (!empty($members)): ?>
         <?php foreach ($members as $member): ?>
           <div class="info_member">
-             <?php
-        $imageSrc = !empty($member["image"]) ? $member["image"] : 'styles/images/default.png';
-        ?>
-        <img class="member-photo" src="<?= htmlspecialchars($imageSrc) ?>" alt="<?= htmlspecialchars($member["name"]) ?>">
+            <div id="container-member-photo">
+            <?php
+            $imageSrc = !empty($member["image"]) ? $member["image"] : 'styles/images/default.png';
+            ?>
+            <img class="member-photo" src="<?= htmlspecialchars($imageSrc) ?>" alt="<?= htmlspecialchars($member["name"]) ?>">
+            </div>
             <div class="info_member_desc">
               <ul class="desc_details">
                 <li>
