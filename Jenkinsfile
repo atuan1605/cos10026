@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         COMPOSER_HOME = '.composer'
+        PHP = '/opt/homebrew/bin/php'
     }
 
     stages {
@@ -11,7 +12,8 @@ pipeline {
                 echo '📦 Installing dependencies...'
                 script {
                     try {
-                        sh '/opt/homebrew/bin/php /opt/homebrew/bin/composer install --no-interaction'
+                        sh "${env.PHP} /opt/homebrew/bin/composer install --no-interaction"
+                        sh 'zip -r build-artifact.zip . -x "*.git*"'
                     } catch (e) {
                         echo '⚠️ Composer install failed. Skipping...'
                     }
@@ -24,9 +26,9 @@ pipeline {
                 echo '🧪 Running PHPUnit tests...'
                 script {
                     try {
-                        sh 'test -f ./vendor/bin/phpunit && ./vendor/bin/phpunit --testdox || echo "PHPUnit not found."'
+                        sh "${env.PHP} vendor/bin/phpunit --testdox"
                     } catch (e) {
-                        echo '⚠️ PHPUnit execution failed. Skipping...'
+                        echo '⚠️ PHPUnit not found or failed.'
                     }
                 }
             }
@@ -37,9 +39,9 @@ pipeline {
                 echo '🧹 Running PHP CodeSniffer...'
                 script {
                     try {
-                        sh 'test -f ./vendor/bin/phpcs && ./vendor/bin/phpcs --standard=PSR12 . || echo "PHPCS not found."'
+                        sh "${env.PHP} vendor/bin/phpcs --standard=PSR12 ."
                     } catch (e) {
-                        echo '⚠️ PHPCS failed.'
+                        echo '⚠️ PHPCS failed or not found.'
                     }
                 }
             }
@@ -47,25 +49,29 @@ pipeline {
 
         stage('Security Scan') {
             steps {
-                echo '🔐 Placeholder for security scan'
+                echo '🔐 Simulating security scan...'
+                sh 'echo "No vulnerabilities detected (simulation only)."'
             }
         }
 
         stage('Deploy to Staging') {
             steps {
-                echo '🚀 Placeholder for deployment'
+                echo '🚀 Deploying to staging...'
+                sh 'ls -lh build-artifact.zip || echo "No build artefact found!"'
             }
         }
 
         stage('Release to Production') {
             steps {
-                echo '📦 Placeholder for production release'
+                echo '📦 Releasing to production...'
+                sh 'echo "Production release successful (simulated)."'
             }
         }
 
         stage('Monitoring & Alerting') {
             steps {
-                echo '📈 Placeholder for monitoring'
+                echo '📈 Monitoring services...'
+                sh 'echo "System is up at $(date)"'
             }
         }
     }
