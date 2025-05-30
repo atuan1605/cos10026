@@ -1,6 +1,11 @@
-stage('Run Unit Tests') {
-    steps {
-        echo '🧪 Simulating test'
-        sh 'ls tests || echo "tests folder not found"'
+pipeline {
+    agent any
+
+    stages {
+        stage('Ping') {
+            steps {
+                echo '✅ Jenkinsfile loaded successfully!'
+            }
+        }
     }
 }
