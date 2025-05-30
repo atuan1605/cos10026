@@ -11,9 +11,9 @@ pipeline {
                 echo '📦 Installing dependencies...'
                 script {
                     try {
-                        sh 'composer install --no-interaction'
+                        sh '/opt/homebrew/bin/composer install --no-interaction'
                     } catch (e) {
-                        echo '⚠️ Composer not found or install failed. Skipping...'
+                        echo '⚠️ Composer install failed. Skipping...'
                     }
                 }
             }
