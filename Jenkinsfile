@@ -11,7 +11,7 @@ pipeline {
                 echo '📦 Installing dependencies...'
                 script {
                     try {
-                        sh '/opt/homebrew/bin/composer install --no-interaction'
+                        sh 'PHP_BINARY=/opt/homebrew/bin/php /opt/homebrew/bin/composer install --no-interaction'
                     } catch (e) {
                         echo '⚠️ Composer install failed. Skipping...'
                     }
